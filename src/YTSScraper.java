@@ -4,6 +4,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class YTSScraper {
 
@@ -17,14 +20,12 @@ public class YTSScraper {
 
         try {
             // Processar a primeira página
-            System.out.println("Processando página: 1");
             hasNextPage = scrapeAllMovies(baseURL);
 
             // Processar as próximas páginas diretamente pela URL paginada
             pageNumber++;
             while (hasNextPage) {
                 String url = paginatedURL + pageNumber; // Usar paginatedURL para as próximas páginas
-                System.out.println("Processando página: " + pageNumber);
                 hasNextPage = scrapeAllMovies(url);
                 pageNumber++; // Incrementar o número da página
             }
@@ -111,23 +112,8 @@ public class YTSScraper {
             Element directorElement = movieDoc.selectFirst(".directors .list-cast .name-cast");
             String director = directorElement != null ? directorElement.text() : "Diretor desconhecido";
 
-            // Captura as resoluções, tamanhos de arquivos e links
-            Elements resolutionElements = movieDoc.select(".modal-torrent");
-
-            StringBuilder resolutions = new StringBuilder();
-            for (Element resolutionElement : resolutionElements) {
-                String resolution = resolutionElement.selectFirst(".modal-quality span").text(); // Ex: 720p, 1080p
-                String fileSize = resolutionElement.select(".quality-size").get(1).text(); // Ex: 912.56 MB, 1.83 GB
-                String torrentLink = resolutionElement.selectFirst(".download-torrent").attr("href"); // Link para o torrent
-                String magnetLink = resolutionElement.selectFirst(".magnet-download").attr("href"); // Link magnet
-
-                // Formatação da saída de resoluções e links
-                resolutions.append(resolution).append(" (").append(fileSize).append(")\n");
-                resolutions.append("Link Torrent: ").append(torrentLink).append("\n");
-                resolutions.append("Magnet: ").append(magnetLink).append("\n\n");
-            }
-
-            String availableResolutions = resolutions.length() > 0 ? resolutions.toString().trim() : "Resoluções desconhecidas";
+            // Chamar o método para extrair resoluções
+            String availableResolutions = extractResolutions(movieDoc);
 
             // Exibe os detalhes do filme
             System.out.println("Filme: " + movieTitle);
@@ -147,9 +133,65 @@ public class YTSScraper {
         }
     }
 
+    // Método para extrair resoluções e retorná-las em formato String
+    private static String extractResolutions(Document movieDoc) {
+        Elements resolutionElements = movieDoc.select(".modal-torrent");
 
+        StringBuilder resolutions = new StringBuilder();
 
-    // Função auxiliar para capitalizar a primeira letra e deixar o restante em minúsculas
+        // Regex para identificar o tamanho do arquivo (ex: "5.54 GB" ou "814.81 MB")
+        String fileSizeRegex = "(\\d+(?:\\.\\d+)?\\s(?:GB|MB))";
+
+        for (Element resolutionElement : resolutionElements) {
+            // Resolução principal (720p, 1080p, etc.)
+            String resolution = resolutionElement.selectFirst(".modal-quality span").text(); // Ex: 720p, 1080p
+
+            // Pegamos todos os valores concatenados por ponto, como "WEB.x265.10bit"
+            String concatenatedQualities = resolutionElement.select(".quality-size").text(); // Ex: "WEB.x265.10bit.5.54 GB"
+
+            // Extraímos o tamanho do arquivo usando regex
+            Pattern pattern = Pattern.compile(fileSizeRegex);
+            Matcher matcher = pattern.matcher(concatenatedQualities);
+            String fileSize = "";
+
+            // Verifica se encontramos o tamanho do arquivo
+            if (matcher.find()) {
+                fileSize = matcher.group(1); // Captura o tamanho do arquivo (ex: "5.54 GB")
+                // Removemos o tamanho do arquivo da string concatenada para evitar problemas
+                concatenatedQualities = concatenatedQualities.replace(fileSize, "").trim();
+            }
+
+            // Dividimos os valores restantes com base no ponto, agora sem o tamanho do arquivo
+            String[] qualities = concatenatedQualities.split("\\.");
+
+            // Loop para adicionar cada parte ao vetor dinâmico
+            StringBuilder qualityDetails = new StringBuilder(resolution);
+            for (String part : qualities) {
+                qualityDetails.append(" ").append(part);
+            }
+
+            // Adiciona o tamanho do arquivo
+            if (!fileSize.isEmpty()) {
+                qualityDetails.append(" (").append(fileSize).append(")");
+            }
+
+            // Links
+            String torrentLink = resolutionElement.selectFirst(".download-torrent").attr("href");
+            String magnetLink = resolutionElement.selectFirst(".magnet-download").attr("href");
+
+            // Formata o resultado final
+            String formattedDetails = qualityDetails.toString() + "\n"
+                    + "Link Torrent: " + torrentLink + "\n"
+                    + "Magnet: " + magnetLink + "\n";
+
+            // Adiciona ao StringBuilder
+            resolutions.append(formattedDetails).append("\n");
+        }
+
+        return resolutions.length() > 0 ? resolutions.toString().trim() : "Resoluções desconhecidas";
+    }
+
+    // Método auxiliar para capitalizar a primeira letra de uma string
     private static String capitalizeFirstLetter(String text) {
         if (text == null || text.isEmpty()) {
             return text;
