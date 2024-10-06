@@ -53,46 +53,40 @@ public class YTSScraper {
             return false;
         }
 
-        // Para cada filme, capturar o nome, ano, gênero e detalhes
+        // Para cada filme, passar o elemento do filme para extrair os detalhes
         for (Element movie : movies) {
-            String movieName = movie.select(".browse-movie-title").text();
-            String movieYear = movie.select(".browse-movie-year").text();
-            String movieLink = movie.select(".browse-movie-link").attr("href");
-
-            // Exibir o nome do filme e ano no console
-            System.out.println("Filme encontrado: " + movieName + " (" + movieYear + ")");
-
-            // Tentar acessar a página interna de cada filme
-            try {
-                scrapeMovieDetails(movieLink);
-            } catch (HttpStatusException e) {
-                // Capturar erros 401, 404 e continuar o scraping
-                System.out.println("Erro ao acessar a página do filme: " + movieLink + " - Status: " + e.getStatusCode());
-                continue; // Pula para o próximo filme
-            }
+            extractMovieDetails(movie);  // Passa o elemento do filme para o método
         }
 
         // Se filmes foram encontrados, continuar para a próxima página
         return true;
     }
 
-    // Função para acessar a página do filme e pegar os detalhes adicionais
-    private static void scrapeMovieDetails(String moviePageUrl) throws IOException {
-        // Simulando o acesso por um navegador para evitar o erro 401
-        Document movieDoc = Jsoup.connect(moviePageUrl)
+    // Função para extrair todos os detalhes do filme em uma única operação
+    private static void extractMovieDetails(Element movie) throws IOException {
+        // Captura o nome do filme, o ano, e o link da página principal
+        String movieName = movie.select(".browse-movie-title").text();
+        String movieYear = movie.select(".browse-movie-year").text();
+        String movieLink = movie.select(".browse-movie-link").attr("href");
+
+        // Exibir o nome do filme e ano no console
+        System.out.println("Filme encontrado: " + movieName + " (" + movieYear + ")");
+
+        // Conectando à página interna do filme
+        Document movieDoc = Jsoup.connect(movieLink)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
                 .get();
 
-        // Pegando o título do filme
-        String movieTitle = movieDoc.selectFirst("h1[itemprop=name]").text();
+        // Pegando o título do filme na página interna
+        Element movieTitleInternalElement = movieDoc.selectFirst("h1[itemprop=name]");
+        String movieTitle = movieTitleInternalElement != null ? movieTitleInternalElement.text() : "Título desconhecido";
 
-        // Pegando o ano do filme
-        String year = movieDoc.select("h2").get(0).text(); // O primeiro <h2> contém o ano
+        // Pegando o ano e gênero do filme na página interna
+        Elements h2Elements = movieDoc.select("h2");
+        String year = h2Elements.size() > 0 ? h2Elements.get(0).text() : "Ano desconhecido";
+        String genres = h2Elements.size() > 1 ? h2Elements.get(1).text() : "Gênero desconhecido";
 
-        // Pegando o gênero do filme
-        String genres = movieDoc.select("h2").get(1).text(); // O segundo <h2> contém o gênero
-
-        // Pegando a sinopse correta da página
+        // Pegando a sinopse (na página interna)
         Element synopsisElement = movieDoc.selectFirst("#synopsis p");
         String synopsis = synopsisElement != null ? synopsisElement.text() : "Sinopse não disponível";
 
@@ -108,8 +102,8 @@ public class YTSScraper {
         Element castElement = movieDoc.selectFirst(".actors .list-cast .name-cast");
         String cast = castElement != null ? castElement.text() : "Elenco desconhecido";
 
-        // Exibir os detalhes do filme no console
-        System.out.println("Filme encontrado: " + movieTitle);
+        // Exibir todos os detalhes do filme no console
+        System.out.println("Título na página interna: " + movieTitle);
         System.out.println("Ano: " + year);
         System.out.println("Gêneros: " + genres);
         System.out.println("Sinopse: " + synopsis);
