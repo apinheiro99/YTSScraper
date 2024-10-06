@@ -64,7 +64,7 @@ public class YTSScraper {
     // Função para extrair todos os detalhes do filme em uma única operação
     private static void extractMovieDetails(Element movie) {
         String movieName = movie.select(".browse-movie-title").text();
-        String movieLink = movie.select(".browse-movie-link").attr("href");
+        String movieLink = movie.select(".browse-movie-link").attr("href"); // Link do filme
 
         String idiomaAbreviado = "[EN]";
         String idiomaExtenso = "English";
@@ -112,14 +112,25 @@ public class YTSScraper {
             Element directorElement = movieDoc.selectFirst(".directors .list-cast .name-cast");
             String director = directorElement != null ? directorElement.text() : "Diretor desconhecido";
 
+            // Pegando o link do trailer
+            Element trailerElement = movieDoc.selectFirst("a.youtube");
+            String trailerLink = trailerElement != null ? trailerElement.attr("href") : "Trailer não disponível";
+
+            // Pegando a capa do filme
+            Element coverElement = movieDoc.selectFirst("#movie-poster img");
+            String movieCover = coverElement != null ? coverElement.attr("src") : "Capa não disponível";
+
             // Chamar o método para extrair resoluções
             String availableResolutions = extractResolutions(movieDoc);
 
-            // Exibe os detalhes do filme
+            // Exibe os detalhes do filme, incluindo o link da página, URL da capa e o link do trailer
             System.out.println("Filme: " + movieTitle);
             System.out.println("Ano: " + year);
             System.out.println("Idioma: " + idiomaAbreviado + " " + capitalizeFirstLetter(idiomaExtenso));
             System.out.println("Gêneros: " + genres);
+            System.out.println("Link da página: " + movieLink); // Link da página
+            System.out.println("Capa: " + movieCover); // URL da capa
+            System.out.println("Trailer: " + trailerLink); // Link do trailer
             System.out.println("Sinopse: " + synopsis);
             System.out.println("Duração: " + runtime);
             System.out.println("Elenco: " + cast);
@@ -132,6 +143,7 @@ public class YTSScraper {
             System.out.println("Motivo: " + e.getMessage());
         }
     }
+
 
     // Método para extrair resoluções e retorná-las em formato String
     private static String extractResolutions(Document movieDoc) {
