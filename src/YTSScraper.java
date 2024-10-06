@@ -2,14 +2,16 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.jsoup.HttpStatusException;
 
 import java.io.IOException;
 
 public class YTSScraper {
 
     public static void main(String[] args) {
-        // URL base para a navegação de páginas
+        // URL base para a primeira página
         String baseURL = "https://yts.mx/browse-movies/0/all/all/0/year/0/all";
+        // URL para as páginas subsequentes
         String paginatedURL = "https://yts.mx/browse-movies/0/all/all/0/year/0/all?page=";
 
         int pageNumber = 1;
@@ -17,13 +19,13 @@ public class YTSScraper {
 
         try {
             // Processar a primeira página
-            System.out.println("Processando página: " + pageNumber);
+            System.out.println("Processando página: 1");
             hasNextPage = scrapeAllMovies(baseURL);
 
-            // Continuar para as próximas páginas, onde a URL inclui o parâmetro ?page=
+            // Processar as próximas páginas diretamente pela URL paginada
             pageNumber++;
             while (hasNextPage) {
-                String url = paginatedURL + pageNumber;
+                String url = paginatedURL + pageNumber; // Usar paginatedURL para as próximas páginas
                 System.out.println("Processando página: " + pageNumber);
                 hasNextPage = scrapeAllMovies(url);
                 pageNumber++; // Incrementar o número da página
@@ -45,6 +47,12 @@ public class YTSScraper {
         // Seleciona todos os elementos de filmes na página
         Elements movies = doc.select(".browse-movie-wrap");
 
+        // Se não houver filmes na página, retorne false
+        if (movies.isEmpty()) {
+            System.out.println("Nenhum filme encontrado na página: " + url);
+            return false;
+        }
+
         // Para cada filme, capturar o nome, ano, gênero e detalhes
         for (Element movie : movies) {
             String movieName = movie.select(".browse-movie-title").text();
@@ -54,18 +62,26 @@ public class YTSScraper {
             // Exibir o nome do filme e ano no console
             System.out.println("Filme encontrado: " + movieName + " (" + movieYear + ")");
 
-            // Acessar a página interna de cada filme para pegar mais detalhes
-            scrapeMovieDetails(movieLink);
+            // Tentar acessar a página interna de cada filme
+            try {
+                scrapeMovieDetails(movieLink);
+            } catch (HttpStatusException e) {
+                // Capturar erros 401, 404 e continuar o scraping
+                System.out.println("Erro ao acessar a página do filme: " + movieLink + " - Status: " + e.getStatusCode());
+                continue; // Pula para o próximo filme
+            }
         }
 
-        // Verificar se há um botão ou link "Next" para continuar para a próxima página
-        Element nextButton = doc.selectFirst(".pagination .next");
-        return nextButton != null && nextButton.hasAttr("href");
+        // Se filmes foram encontrados, continuar para a próxima página
+        return true;
     }
 
     // Função para acessar a página do filme e pegar os detalhes adicionais
     private static void scrapeMovieDetails(String moviePageUrl) throws IOException {
-        Document movieDoc = Jsoup.connect(moviePageUrl).get();
+        // Simulando o acesso por um navegador para evitar o erro 401
+        Document movieDoc = Jsoup.connect(moviePageUrl)
+                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
+                .get();
 
         // Pegando o título do filme
         String movieTitle = movieDoc.selectFirst("h1[itemprop=name]").text();
@@ -110,7 +126,9 @@ public class YTSScraper {
 
         while (retries < maxRetries) {
             try {
-                doc = Jsoup.connect(url).timeout(10 * 1000).get();
+                doc = Jsoup.connect(url)
+                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
+                        .timeout(10 * 1000).get();
                 break; // Sucesso, sai do loop
             } catch (IOException e) {
                 retries++;
