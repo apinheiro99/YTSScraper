@@ -60,23 +60,21 @@ public class YTSScraper {
         return true;
     }
 
+    // Função para extrair todos os detalhes do filme em uma única operação
     private static void extractMovieDetails(Element movie) {
-        // Captura o nome do filme e o link da página principal
         String movieName = movie.select(".browse-movie-title").text();
         String movieLink = movie.select(".browse-movie-link").attr("href");
 
-        // Inicializa o idioma padrão como inglês (abreviação)
         String idiomaAbreviado = "[EN]";
         String idiomaExtenso = "English";
 
-        // Verifica se o nome do filme contém colchetes e captura a abreviação do idioma
         if (movieName.startsWith("[")) {
-            String abreviacaoIdioma = movieName.substring(0, movieName.indexOf("]") + 1); // Exemplo: [ES], [PT]
+            String abreviacaoIdioma = movieName.substring(0, movieName.indexOf("]") + 1);
             idiomaAbreviado = abreviacaoIdioma;
         }
 
         try {
-            // Conectando à página interna do filme para obter mais detalhes, incluindo o idioma por extenso
+            // Conectando à página interna do filme para obter mais detalhes
             Document movieDoc = Jsoup.connect(movieLink)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
                     .get();
@@ -88,12 +86,10 @@ public class YTSScraper {
             // Pegando o ano e o idioma por extenso da página interna
             Elements h2Elements = movieDoc.select("h2");
             String year = h2Elements.size() > 0 ? h2Elements.get(0).text() : "Ano desconhecido";
-
-            // Verifica se o ano contém colchetes e captura o idioma por extenso
             if (year.contains("[")) {
-                String[] yearParts = year.split("\\[");  // Divide o ano e o idioma
-                year = yearParts[0].trim();  // Mantém o ano puro
-                idiomaExtenso = yearParts[1].replace("]", "").trim();  // Captura o idioma por extenso (ex: Spanish, Hindi)
+                String[] yearParts = year.split("\\[");
+                year = yearParts[0].trim();
+                idiomaExtenso = yearParts[1].replace("]", "").trim();
             }
 
             // Pegando o gênero do filme na página interna
@@ -115,7 +111,25 @@ public class YTSScraper {
             Element directorElement = movieDoc.selectFirst(".directors .list-cast .name-cast");
             String director = directorElement != null ? directorElement.text() : "Diretor desconhecido";
 
-            // Exibir todos os detalhes do filme no console
+            // Captura as resoluções, tamanhos de arquivos e links
+            Elements resolutionElements = movieDoc.select(".modal-torrent");
+
+            StringBuilder resolutions = new StringBuilder();
+            for (Element resolutionElement : resolutionElements) {
+                String resolution = resolutionElement.selectFirst(".modal-quality span").text(); // Ex: 720p, 1080p
+                String fileSize = resolutionElement.select(".quality-size").get(1).text(); // Ex: 912.56 MB, 1.83 GB
+                String torrentLink = resolutionElement.selectFirst(".download-torrent").attr("href"); // Link para o torrent
+                String magnetLink = resolutionElement.selectFirst(".magnet-download").attr("href"); // Link magnet
+
+                // Formatação da saída de resoluções e links
+                resolutions.append(resolution).append(" (").append(fileSize).append(")\n");
+                resolutions.append("Link Torrent: ").append(torrentLink).append("\n");
+                resolutions.append("Magnet: ").append(magnetLink).append("\n\n");
+            }
+
+            String availableResolutions = resolutions.length() > 0 ? resolutions.toString().trim() : "Resoluções desconhecidas";
+
+            // Exibe os detalhes do filme
             System.out.println("Filme: " + movieTitle);
             System.out.println("Ano: " + year);
             System.out.println("Idioma: " + idiomaAbreviado + " " + capitalizeFirstLetter(idiomaExtenso));
@@ -124,14 +138,16 @@ public class YTSScraper {
             System.out.println("Duração: " + runtime);
             System.out.println("Elenco: " + cast);
             System.out.println("Diretor: " + director);
+            System.out.println("Resoluções disponíveis:\n" + availableResolutions);
             System.out.println("-----------------------------------------------");
 
         } catch (IOException e) {
-            // Exibe mensagem de erro caso ocorra um problema ao acessar a página do filme
             System.out.println("Erro ao acessar a página do filme: " + movieLink);
             System.out.println("Motivo: " + e.getMessage());
         }
     }
+
+
 
     // Função auxiliar para capitalizar a primeira letra e deixar o restante em minúsculas
     private static String capitalizeFirstLetter(String text) {
