@@ -12,7 +12,19 @@
     "Duração" : "1 hr 28 min",
     "Elenco" : "Kevin Sorbo",
     "Diretor" : "Hector Echavarria",
-    "Resoluções" : "720p WEB (814.81 MB)\nLink Torrent: https://yts.mx/torrent/download/2DD1B6B941EE57ED1F15F18F8D7343F9BEA46B78\nMagnet: magnet:?xt=urn:btih:2DD1B6B941EE57ED1F15F18F8D7343F9BEA46B78&dn=The+Pastor+%282025%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce\n\n1080p WEB (1.63 GB)\nLink Torrent: https://yts.mx/torrent/download/68DC4BB1D79AF2DC8470BD5CDFCA7D787B6299A0\nMagnet: magnet:?xt=urn:btih:68DC4BB1D79AF2DC8470BD5CDFCA7D787B6299A0&dn=The+Pastor+%282025%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "814.81 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/2DD1B6B941EE57ED1F15F18F8D7343F9BEA46B78",
+      "Magnet" : "magnet:?xt=urn:btih:2DD1B6B941EE57ED1F15F18F8D7343F9BEA46B78&dn=The+Pastor+%282025%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.63 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/68DC4BB1D79AF2DC8470BD5CDFCA7D787B6299A0",
+      "Magnet" : "magnet:?xt=urn:btih:68DC4BB1D79AF2DC8470BD5CDFCA7D787B6299A0&dn=The+Pastor+%282025%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
   },
   "From the Ashes" : {
     "Ano" : "2024",
@@ -27,21 +39,381 @@
     "Duração" : "1 hr 32 min",
     "Elenco" : "N/A",
     "Diretor" : "Jeremy Wiles",
-    "Resoluções" : "720p WEB (849.68 MB)\nLink Torrent: https://yts.mx/torrent/download/4E8477C41B1D12E49778E4F41B7B5757DBBC8789\nMagnet: magnet:?xt=urn:btih:4E8477C41B1D12E49778E4F41B7B5757DBBC8789&dn=From+the+Ashes+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce\n\n1080p WEB (1.7 GB)\nLink Torrent: https://yts.mx/torrent/download/15CB54C919BEE321AD2399CA11F87CDD8BC9E9FB\nMagnet: magnet:?xt=urn:btih:15CB54C919BEE321AD2399CA11F87CDD8BC9E9FB&dn=From+the+Ashes+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "849.68 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/4E8477C41B1D12E49778E4F41B7B5757DBBC8789",
+      "Magnet" : "magnet:?xt=urn:btih:4E8477C41B1D12E49778E4F41B7B5757DBBC8789&dn=From+the+Ashes+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.7 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/15CB54C919BEE321AD2399CA11F87CDD8BC9E9FB",
+      "Magnet" : "magnet:?xt=urn:btih:15CB54C919BEE321AD2399CA11F87CDD8BC9E9FB&dn=From+the+Ashes+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
   },
   "Trouble" : {
     "Ano" : "2024",
-    "Idioma" : [ "[EN]", "English" ],
-    "Gêneros" : [ "" ],
-    "Link da página" : "https://yts.mx/movies/trouble-2-2024",
-    "Capa" : "https://img.yts.mx/assets/images/movies/trouble_2_2024/medium-cover.jpg",
-    "Trailer" : "https://www.youtube.com/embed/?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
-    "IMDb" : "https://www.imdb.com/title/tt33323541/",
-    "IMDb Rating" : "N/A",
-    "Sinopse" : "Trouble explores the intricate dynamics between two brothers in their early twenties, as they attempt to navigate their divorced parents’ shortcomings when Mum shows up uninvited to Dad’s birthday.",
+    "Idioma" : [ "[SV]", "SWEDISH" ],
+    "Gêneros" : [ "Action", "Comedy", "Crime" ],
+    "Link da página" : "https://yts.mx/movies/trouble-2024",
+    "Capa" : "https://img.yts.mx/assets/images/movies/trouble_2024/medium-cover.jpg",
+    "Trailer" : "https://www.youtube.com/embed/hdbBfoLqhc0?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
+    "IMDb" : "https://www.imdb.com/title/tt30217143/",
+    "IMDb Rating" : "6.1",
+    "Sinopse" : "Wrongfully convicted of murder, a clumsy electronics salesman faces police corruption and criminal conspiracies in an attempt to prove his innocence.",
     "Duração" : "1 hr 38 min",
-    "Elenco" : "N/A",
-    "Diretor" : "Sarah Blok",
-    "Resoluções" : "720p BluRay (905.21 MB)\nLink Torrent: https://yts.mx/torrent/download/ABB1370F33A3FD2161F4727EEEC861324DFB85EC\nMagnet: magnet:?xt=urn:btih:ABB1370F33A3FD2161F4727EEEC861324DFB85EC&dn=Trouble+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce\n\n1080p BluRay (1.81 GB)\nLink Torrent: https://yts.mx/torrent/download/818E5FC47A652E9BEB66BD8432655A4696EAC619\nMagnet: magnet:?xt=urn:btih:818E5FC47A652E9BEB66BD8432655A4696EAC619&dn=Trouble+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    "Elenco" : "Eva Melander",
+    "Diretor" : "Jon Holmberg",
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "907.18 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/BEBFD8A508D149E39CDCA06339B39C0B360E3874",
+      "Magnet" : "magnet:?xt=urn:btih:BEBFD8A508D149E39CDCA06339B39C0B360E3874&dn=Trouble+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.82 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/A784CFC6A28EF626F69E18F936E0C20797CF4B68",
+      "Magnet" : "magnet:?xt=urn:btih:A784CFC6A28EF626F69E18F936E0C20797CF4B68&dn=Trouble+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
+  },
+  "Autumn at Apple Hill" : {
+    "Ano" : "2024",
+    "Idioma" : [ "[EN]", "English" ],
+    "Gêneros" : [ "Comedy", "Romance" ],
+    "Link da página" : "https://yts.mx/movies/autumn-at-apple-hill-2024",
+    "Capa" : "https://img.yts.mx/assets/images/movies/autumn_at_apple_hill_2024/medium-cover.jpg",
+    "Trailer" : "https://www.youtube.com/embed/?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
+    "IMDb" : "https://www.imdb.com/title/tt33060158/",
+    "IMDb Rating" : "7.2",
+    "Sinopse" : "Newly divorced, Elise is renovating an inn that she inherited from her grandparents. When Luke, CFO of a major hotel chain, arrives in town, she does her best to scare him off… but Luke just might be the best person to help her restore the Inn at Apple Hill to its former glory.",
+    "Duração" : "1 hr 24 min",
+    "Elenco" : "Erin Cahill",
+    "Diretor" : "Séan Geraughty",
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "762.16 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/F620D1579D7D95D5ACA6DBDF2578FAD578E21ED5",
+      "Magnet" : "magnet:?xt=urn:btih:F620D1579D7D95D5ACA6DBDF2578FAD578E21ED5&dn=Autumn+at+Apple+Hill+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.54 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/BB0DBEF1F7441EBAFBA2F70EE1335758A1F5C049",
+      "Magnet" : "magnet:?xt=urn:btih:BB0DBEF1F7441EBAFBA2F70EE1335758A1F5C049&dn=Autumn+at+Apple+Hill+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.41 GB",
+      "Detalhes técnicos" : [ "WEB", "x265", "10bit" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/2FE312CC601A34F212EE8BA939EDEDF0C783D8DA",
+      "Magnet" : "magnet:?xt=urn:btih:2FE312CC601A34F212EE8BA939EDEDF0C783D8DA&dn=Autumn+at+Apple+Hill+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
+  },
+  "CTRL" : {
+    "Ano" : "2024",
+    "Idioma" : [ "[HI]", "HINDI" ],
+    "Gêneros" : [ "Drama", "Thriller" ],
+    "Link da página" : "https://yts.mx/movies/ctrl-2024",
+    "Capa" : "https://img.yts.mx/assets/images/movies/ctrl_2024/medium-cover.jpg",
+    "Trailer" : "https://www.youtube.com/embed/?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
+    "IMDb" : "https://www.imdb.com/title/tt12736014/",
+    "IMDb Rating" : "6.4",
+    "Sinopse" : "Nella and Joe are the perfect influencer couple. But when he cheats on her, she turns to an AI app to erase him from her life — until it takes control.",
+    "Duração" : "1 hr 39 min",
+    "Elenco" : "Ananya Panday",
+    "Diretor" : "Vikramaditya Motwane",
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "912.56 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/F52C2680C4358BB5E57F645D814E1FD1A9269F24",
+      "Magnet" : "magnet:?xt=urn:btih:F52C2680C4358BB5E57F645D814E1FD1A9269F24&dn=CTRL+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.83 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/A8981846E43AB7EE71DC6F8F2F54FB6DCC3ACB56",
+      "Magnet" : "magnet:?xt=urn:btih:A8981846E43AB7EE71DC6F8F2F54FB6DCC3ACB56&dn=CTRL+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
+  },
+  "A Sprinkle of Deceit: A Hannah Swensen Mystery" : {
+    "Ano" : "2024",
+    "Idioma" : [ "[EN]", "English" ],
+    "Gêneros" : [ "Crime", "Mystery" ],
+    "Link da página" : "https://yts.mx/movies/a-sprinkle-of-deceit-a-hannah-swensen-mystery-2024",
+    "Capa" : "https://img.yts.mx/assets/images/movies/a_sprinkle_of_deceit_a_hannah_swensen_mystery_2024/medium-cover.jpg",
+    "Trailer" : "https://www.youtube.com/embed/g4vw3G5YlzM?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
+    "IMDb" : "https://www.imdb.com/title/tt33063626/",
+    "IMDb Rating" : "6.4",
+    "Sinopse" : "Hannah and Chad flirt with their own paths to solve the same murder while working to clear a colleague who is implicated in the crime. Meanwhile, Delores gets her big break",
+    "Duração" : "1 hr 24 min",
+    "Elenco" : "Ashley Williams",
+    "Diretor" : "Kevin Leslie",
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "763.41 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/56E1436F382501484092A1369D7570B9D3DDFF5E",
+      "Magnet" : "magnet:?xt=urn:btih:56E1436F382501484092A1369D7570B9D3DDFF5E&dn=A+Sprinkle+of+Deceit%3A+A+Hannah+Swensen+Mystery+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.54 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/BE0D61735254C8FBF7FC9E9E4508107F188C6158",
+      "Magnet" : "magnet:?xt=urn:btih:BE0D61735254C8FBF7FC9E9E4508107F188C6158&dn=A+Sprinkle+of+Deceit%3A+A+Hannah+Swensen+Mystery+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
+  },
+  "El Diario" : {
+    "Ano" : "2024",
+    "Idioma" : [ "[ES]", "SPANISH" ],
+    "Gêneros" : [ "Thriller" ],
+    "Link da página" : "https://yts.mx/movies/el-diario-2024",
+    "Capa" : "https://img.yts.mx/assets/images/movies/el_diario_2024/medium-cover.jpg",
+    "Trailer" : "https://www.youtube.com/embed/?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
+    "IMDb" : "https://www.imdb.com/title/tt28576307/",
+    "IMDb Rating" : "4.7",
+    "Sinopse" : "Olga discovers the unfinished diary of a notorious killer and becomes captivated by its dark secrets. As she delves deeper, she uncovers a mysterious connection between them, putting her life—and the lives of those around her—in grave danger.",
+    "Duração" : "1 hr 22 min",
+    "Elenco" : "Mauricio Ochmann",
+    "Diretor" : "Alba Gil",
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "763.32 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/0E1B881B08A9F48FC1B0852AA84603A64DAB4D03",
+      "Magnet" : "magnet:?xt=urn:btih:0E1B881B08A9F48FC1B0852AA84603A64DAB4D03&dn=El+Diario+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.53 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/A9B8DD1B87623A251E69F8DCAD90DC70641B7432",
+      "Magnet" : "magnet:?xt=urn:btih:A9B8DD1B87623A251E69F8DCAD90DC70641B7432&dn=El+Diario+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
+  },
+  "Spin the Bottle" : {
+    "Ano" : "2024",
+    "Idioma" : [ "[EN]", "English" ],
+    "Gêneros" : [ "Horror" ],
+    "Link da página" : "https://yts.mx/movies/spin-the-bottle-2024",
+    "Capa" : "https://img.yts.mx/assets/images/movies/spin_the_bottle_2024/medium-cover.jpg",
+    "Trailer" : "https://www.youtube.com/embed/KkSk2xG82Zs?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
+    "IMDb" : "https://www.imdb.com/title/tt22029194/",
+    "IMDb Rating" : "3.5",
+    "Sinopse" : "When a group of friends play spin the bottle in a house marked by a brutal massacre, they unknowingly unleash an evil spirit and start dying in terrifying ways. Now, the survivors must stick together to uncover the house's dark secrets and end the bloodshed.",
+    "Duração" : "2 hr 4 min",
+    "Elenco" : "Justin Long",
+    "Diretor" : "Gavin Wiesen",
+    "Resoluções" : [ {
+      "Qualidade" : "2160p",
+      "Tamanho do arquivo" : "5.54 GB",
+      "Detalhes técnicos" : [ "WEB", "x265", "10bit" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/C3D5018F38940B2F4B04A47BA6276A306E848DEC",
+      "Magnet" : "magnet:?xt=urn:btih:C3D5018F38940B2F4B04A47BA6276A306E848DEC&dn=Spin+the+Bottle+%282024%29+%5B2160p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
+  },
+  "Aurora Teagarden Mysteries: A Lesson in Murder" : {
+    "Ano" : "2024",
+    "Idioma" : [ "[EN]", "English" ],
+    "Gêneros" : [ "Mystery", "Thriller" ],
+    "Link da página" : "https://yts.mx/movies/aurora-teagarden-mysteries-a-lesson-in-murder-2024",
+    "Capa" : "https://img.yts.mx/assets/images/movies/aurora_teagarden_mysteries_a_lesson_in_murder_2024/medium-cover.jpg",
+    "Trailer" : "https://www.youtube.com/embed/hyq4PHpxalA?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
+    "IMDb" : "https://www.imdb.com/title/tt33509525/",
+    "IMDb Rating" : "7.3",
+    "Sinopse" : "When a student from Aurora's true crime literature class is found murdered outside the diner where she works, Aurora takes it upon herself to figure out the real culprit.",
+    "Duração" : "1 hr 24 min",
+    "Elenco" : "Crystal Balint",
+    "Diretor" : "Jessica Harmon",
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "773.35 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/935CCD4F973EB6A17245F5524D617B114243FB98",
+      "Magnet" : "magnet:?xt=urn:btih:935CCD4F973EB6A17245F5524D617B114243FB98&dn=Aurora+Teagarden+Mysteries%3A+A+Lesson+in+Murder+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.4 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/FC9E0997B5317C7E6576540892D5D7D91ACAEAA4",
+      "Magnet" : "magnet:?xt=urn:btih:FC9E0997B5317C7E6576540892D5D7D91ACAEAA4&dn=Aurora+Teagarden+Mysteries%3A+A+Lesson+in+Murder+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
+  },
+  "Cassino in Ischia" : {
+    "Ano" : "2024",
+    "Idioma" : [ "[EN]", "English" ],
+    "Gêneros" : [ "Action" ],
+    "Link da página" : "https://yts.mx/movies/cassino-in-ischia-2024",
+    "Capa" : "https://img.yts.mx/assets/images/movies/cassino_in_ischia_2024/medium-cover.jpg",
+    "Trailer" : "https://www.youtube.com/embed/_xrL2zurMow?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
+    "IMDb" : "https://www.imdb.com/title/tt27759716/",
+    "IMDb Rating" : "5.0",
+    "Sinopse" : "A former film star travels to Italy to work with a struggling director in order to revitalize his career.",
+    "Duração" : "1 hr 57 min",
+    "Elenco" : "Dominic Purcell",
+    "Diretor" : "Frank Ciota",
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "1.06 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/894411AD1A5A33CC173CC41AA0CB714443E4BEB1",
+      "Magnet" : "magnet:?xt=urn:btih:894411AD1A5A33CC173CC41AA0CB714443E4BEB1&dn=Cassino+in+Ischia+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "2.17 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/DBCAF7FE42B88365A02EEB793F5A0D2596FD17CA",
+      "Magnet" : "magnet:?xt=urn:btih:DBCAF7FE42B88365A02EEB793F5A0D2596FD17CA&dn=Cassino+in+Ischia+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "2160p",
+      "Tamanho do arquivo" : "5.25 GB",
+      "Detalhes técnicos" : [ "WEB", "x265", "10bit" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/3B409C10CA62CF944AF9E8ED934586BEFD8273A9",
+      "Magnet" : "magnet:?xt=urn:btih:3B409C10CA62CF944AF9E8ED934586BEFD8273A9&dn=Cassino+in+Ischia+%282024%29+%5B2160p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
+  },
+  "Tim Dillon: This Is Your Country" : {
+    "Ano" : "2024",
+    "Idioma" : [ "[EN]", "English" ],
+    "Gêneros" : [ "Comedy" ],
+    "Link da página" : "https://yts.mx/movies/tim-dillon-this-is-your-country-2024",
+    "Capa" : "https://img.yts.mx/assets/images/movies/tim_dillon_this_is_your_country_2024/medium-cover.jpg",
+    "Trailer" : "https://www.youtube.com/embed/HoYVdbvgRF0?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
+    "IMDb" : "https://www.imdb.com/title/tt33452467/",
+    "IMDb Rating" : "6.9",
+    "Sinopse" : "Comedian Tim Dillon chats with everyday Americans about cryptocurrency, OnlyFans and other outrageous issues they face in this comedy unscripted special.",
+    "Duração" : "12 hr 47 min",
+    "Elenco" : "Tim Dillon",
+    "Diretor" : "Michael Shea",
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "441.17 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/49AFFC81BC784E81BEFC79078FF2233FDFBFA9CA",
+      "Magnet" : "magnet:?xt=urn:btih:49AFFC81BC784E81BEFC79078FF2233FDFBFA9CA&dn=Tim+Dillon%3A+This+Is+Your+Country+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "902.44 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/B52C346CD778EF7E90DEC238797BB031DCE4620D",
+      "Magnet" : "magnet:?xt=urn:btih:B52C346CD778EF7E90DEC238797BB031DCE4620D&dn=Tim+Dillon%3A+This+Is+Your+Country+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
+  },
+  "The Real West" : {
+    "Ano" : "2024",
+    "Idioma" : [ "[EN]", "English" ],
+    "Gêneros" : [ "Romance" ],
+    "Link da página" : "https://yts.mx/movies/the-real-west-2024",
+    "Capa" : "https://img.yts.mx/assets/images/movies/the_real_west_2024/medium-cover.jpg",
+    "Trailer" : "https://www.youtube.com/embed/?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
+    "IMDb" : "https://www.imdb.com/title/tt33337070/",
+    "IMDb Rating" : "7.0",
+    "Sinopse" : "A family vacation to a working ranch introduces Professor Rebecca to Jake West. Rebecca is a widow chasing tenure, and Jake is a handsome cowboy who never settled down.",
+    "Duração" : "1 hr 24 min",
+    "Elenco" : "Lynda Boyd",
+    "Diretor" : "Terry Ingram",
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "772.79 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/52F7F9FF6CA1AC062FBBD60C3C3FA0A1121967EB",
+      "Magnet" : "magnet:?xt=urn:btih:52F7F9FF6CA1AC062FBBD60C3C3FA0A1121967EB&dn=The+Real+West+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.55 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/32B4D0BD25BB09EB2D1652FDFDA1ED85E7C1A28D",
+      "Magnet" : "magnet:?xt=urn:btih:32B4D0BD25BB09EB2D1652FDFDA1ED85E7C1A28D&dn=The+Real+West+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.41 GB",
+      "Detalhes técnicos" : [ "WEB", "x265", "10bit" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/33E8D9AC05D75410BABAB33B830DC9D001FD1BCB",
+      "Magnet" : "magnet:?xt=urn:btih:33E8D9AC05D75410BABAB33B830DC9D001FD1BCB&dn=The+Real+West+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
+  },
+  "The Curse of the Necklace" : {
+    "Ano" : "2024",
+    "Idioma" : [ "[EN]", "English" ],
+    "Gêneros" : [ "Horror" ],
+    "Link da página" : "https://yts.mx/movies/the-curse-of-the-necklace-2024",
+    "Capa" : "https://img.yts.mx/assets/images/movies/the_curse_of_the_necklace_2024/medium-cover.jpg",
+    "Trailer" : "https://www.youtube.com/embed/Ppj3TLJHFgA?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
+    "IMDb" : "https://www.imdb.com/title/tt32276246/",
+    "IMDb Rating" : "4.4",
+    "Sinopse" : "After separating due to his unpredictable alcohol infused temper, Frank try to win his wife Laura back by giving her a beautiful antique necklace he finds in an old 1938 evidence bag at the station. Unfortunately, the necklace is a conduit for the tormented soul of an evil boy from long ago, and Laura and her daughters find themselves in terrible danger from a little boy who no longer exists.",
+    "Duração" : "1 hr 39 min",
+    "Elenco" : "Henry Thomas",
+    "Diretor" : "Juan Pablo Arias Munoz",
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "918.05 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/0F4A53D4A71D36FA9441151BDCE78C75A3E856B8",
+      "Magnet" : "magnet:?xt=urn:btih:0F4A53D4A71D36FA9441151BDCE78C75A3E856B8&dn=The+Curse+of+the+Necklace+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.84 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/DCE7E1869DC21C09F9EB46122DBAD819411EB456",
+      "Magnet" : "magnet:?xt=urn:btih:DCE7E1869DC21C09F9EB46122DBAD819411EB456&dn=The+Curse+of+the+Necklace+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
+  },
+  "The Initiated: Written from the Shadows" : {
+    "Ano" : "2024",
+    "Idioma" : [ "[ES]", "SPANISH" ],
+    "Gêneros" : [ "Drama" ],
+    "Link da página" : "https://yts.mx/movies/the-initiated-written-from-the-shadows-2024",
+    "Capa" : "https://img.yts.mx/assets/images/movies/the_initiated_written_from_the_shadows_2024/medium-cover.jpg",
+    "Trailer" : "https://www.youtube.com/embed/sAHrwSOtnaU?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
+    "IMDb" : "https://www.imdb.com/title/tt31187064/",
+    "IMDb Rating" : "6.3",
+    "Sinopse" : "The formerly revered journalist Frank Molina finds himself in hiding, with his career shattered. However, he continues to write anonymously hidden in the shadows. Frank’s sense of calm is abruptly interrupted when a pair of severed eyes and a blood-soaked note appear at his door. As the number of victims increases, Frank will need to unblock his traumatic past if he seeks to find the killer.",
+    "Duração" : "1 hr 40 min",
+    "Elenco" : "Francisco Denis",
+    "Diretor" : "Carlos Moreno",
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "920.76 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/765BFEF8A7233E03B0F093EC925869A846CC3055",
+      "Magnet" : "magnet:?xt=urn:btih:765BFEF8A7233E03B0F093EC925869A846CC3055&dn=The+Initiated%3A+Written+from+the+Shadows+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.85 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/F517801B272917D1D56341096D1D050E21D81058",
+      "Magnet" : "magnet:?xt=urn:btih:F517801B272917D1D56341096D1D050E21D81058&dn=The+Initiated%3A+Written+from+the+Shadows+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
+  },
+  "The Platform 2" : {
+    "Ano" : "2024",
+    "Idioma" : [ "[ES]", "SPANISH" ],
+    "Gêneros" : [ "Horror", "Sci-Fi", "Thriller" ],
+    "Link da página" : "https://yts.mx/movies/the-platform-2-2024",
+    "Capa" : "https://img.yts.mx/assets/images/movies/the_platform_2_2024/medium-cover.jpg",
+    "Trailer" : "https://www.youtube.com/embed/UKFMYWNatQM?rel=0&wmode=transparent&border=0&autoplay=1&iv_load_policy=3",
+    "IMDb" : "https://www.imdb.com/title/tt27729779/",
+    "IMDb Rating" : "5.0",
+    "Sinopse" : "After a mysterious leader imposes his law in a brutal system of vertical cells, a new arrival battles against a dubious food distribution method.",
+    "Duração" : "1 hr 40 min",
+    "Elenco" : "Natalia Tena",
+    "Diretor" : "Galder Gaztelu-Urrutia",
+    "Resoluções" : [ {
+      "Qualidade" : "720p",
+      "Tamanho do arquivo" : "926.94 MB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/5BCA5F48087717A031C49CDC5F81B585D373D271",
+      "Magnet" : "magnet:?xt=urn:btih:5BCA5F48087717A031C49CDC5F81B585D373D271&dn=The+Platform+2+%282024%29+%5B720p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    }, {
+      "Qualidade" : "1080p",
+      "Tamanho do arquivo" : "1.86 GB",
+      "Detalhes técnicos" : [ "WEB" ],
+      "Link Torrent" : "https://yts.mx/torrent/download/36A22379A347B4E419A05B76491E60B2772B8FDA",
+      "Magnet" : "magnet:?xt=urn:btih:36A22379A347B4E419A05B76491E60B2772B8FDA&dn=The+Platform+2+%282024%29+%5B1080p%5D+%5BYTS.MX%5D&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce"
+    } ]
   }
 }

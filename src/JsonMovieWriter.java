@@ -1,11 +1,9 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class JsonMovieWriter {
     private static final String JSON_FILE_PATH = "movies.json";
@@ -43,7 +41,7 @@ public class JsonMovieWriter {
     public void addOrUpdateMovie(String movieTitle, String year, String idiomaAbreviado, String idiomaExtenso,
                                  String[] genres, String movieLink, String movieCover, String trailerLink,
                                  String imdbLink, String imdbRating, String synopsis, String runtime,
-                                 String cast, String director, String availableResolutions) {
+                                 String cast, String director, ArrayNode availableResolutions) {
         boolean isUpdated = false;
         ObjectNode movieNode = objectMapper.createObjectNode();
 
@@ -73,7 +71,7 @@ public class JsonMovieWriter {
         movieNode.put("Duração", runtime);
         movieNode.put("Elenco", cast);
         movieNode.put("Diretor", director);
-        movieNode.put("Resoluções", availableResolutions);
+        movieNode.set("Resoluções", availableResolutions);
 
         // Verificar se o filme já existe no JSON
         if (rootNode.has(movieTitle)) {
@@ -94,38 +92,7 @@ public class JsonMovieWriter {
         if (isUpdated) {
             System.out.println("Filme: " + movieTitle + " (Updated)");
         } else {
-            printFullMovieDetails(movieTitle, year, idiomaAbreviado, idiomaExtenso, genres, movieLink, movieCover,
-                    trailerLink, imdbLink, imdbRating, synopsis, runtime, cast, director, availableResolutions);
+            System.out.println("Filme: " + movieTitle + " foi adicionado.");
         }
-    }
-
-    // Método auxiliar para capitalizar a primeira letra de uma string
-    private static String capitalizeFirstLetter(String text) {
-        if (text == null || text.isEmpty()) {
-            return text;
-        }
-        return text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
-    }
-
-    // Método para imprimir todos os detalhes do filme se ele for novo
-    private static void printFullMovieDetails(String movieTitle, String year, String idiomaAbreviado, String idiomaExtenso,
-                                              String[] genres, String movieLink, String movieCover, String trailerLink,
-                                              String imdbLink, String imdbRating, String synopsis, String runtime,
-                                              String cast, String director, String availableResolutions) {
-        System.out.println("Filme: " + movieTitle);
-        System.out.println("Ano: " + year);
-        System.out.println("Idioma: " + idiomaAbreviado + " " + capitalizeFirstLetter(idiomaExtenso));
-        System.out.println("Gêneros: " + String.join(" / ", genres));
-        System.out.println("Link da página: " + movieLink);
-        System.out.println("Capa: " + movieCover);
-        System.out.println("Trailer: " + trailerLink);
-        System.out.println("IMDb: " + imdbLink);
-        System.out.println("IMDb Rating: " + imdbRating);
-        System.out.println("Sinopse: " + synopsis);
-        System.out.println("Duração: " + runtime);
-        System.out.println("Elenco: " + cast);
-        System.out.println("Diretor: " + director);
-        System.out.println("Resoluções:\n" + availableResolutions);
-        System.out.println("-----------------------------------------------");
     }
 }

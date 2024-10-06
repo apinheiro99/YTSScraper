@@ -1,10 +1,12 @@
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -84,7 +86,10 @@ public class YTSScraper {
             String movieCover = extractMovieCover(movieDoc);
             String imdbLink = extractImdbLink(movieDoc);
             String imdbRating = fetchImdbOrYtsRating(imdbLink, movieDoc);
-            String availableResolutions = extractResolutions(movieDoc);
+
+            // Cria um ObjectMapper para manipulação JSON
+            ObjectMapper objectMapper = new ObjectMapper();
+            ArrayNode availableResolutions = extractResolutions(movieDoc, objectMapper);
 
             JsonMovieWriter jsonMovieWriter = new JsonMovieWriter();
             jsonMovieWriter.addOrUpdateMovie(movieTitle, year, idiomaAbreviado, idiomaExtenso, genres, movieLink, movieCover,
@@ -95,8 +100,27 @@ public class YTSScraper {
         }
     }
 
+    // Método para tentar acessar uma página com retries
+    private static Document accessPageWithRetry(String url, int maxRetries) throws IOException {
+        int retries = 0;
+        Document doc = null;
 
-    // Funções auxiliares para cada extração
+        while (retries < maxRetries) {
+            try {
+                doc = Jsoup.connect(url)
+                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
+                        .timeout(10 * 1000).get();
+                break; // Sucesso, sai do loop
+            } catch (IOException e) {
+                retries++;
+                System.out.println("Tentativa " + retries + " falhou para " + url);
+                if (retries >= maxRetries) {
+                    throw e; // Lança exceção se atingir o número máximo de tentativas
+                }
+            }
+        }
+        return doc;
+    }
 
     private static String getIdiomaAbreviado(String movieName) {
         if (movieName.startsWith("[")) {
@@ -198,112 +222,43 @@ public class YTSScraper {
         return ytsRatingElement != null ? ytsRatingElement.text() : "N/A";
     }
 
-    private static void printMovieDetails(String movieTitle, String year, String idiomaAbreviado, String idiomaExtenso,
-                                          String[] genres, String movieLink, String movieCover, String trailerLink,
-                                          String imdbLink, String imdbRating, String synopsis, String runtime,
-                                          String cast, String director, String availableResolutions) {
-        System.out.println("Filme: " + movieTitle);
-        System.out.println("Ano: " + year);
-        System.out.println("Idioma: " + idiomaAbreviado + " " + capitalizeFirstLetter(idiomaExtenso));
-        System.out.println("Gêneros: " + String.join(" / ", genres));  // Exibindo os gêneros com barra
-        System.out.println("Link da página: " + movieLink);
-        System.out.println("Capa: " + movieCover);
-        System.out.println("Trailer: " + trailerLink);
-        System.out.println("IMDb: " + imdbLink);
-        System.out.println("IMDb Rating: " + imdbRating);
-        System.out.println("Sinopse: " + synopsis);
-        System.out.println("Duração: " + runtime);
-        System.out.println("Elenco: " + cast);
-        System.out.println("Diretor: " + director);
-        System.out.println("Resoluções:\n" + availableResolutions);
-        System.out.println("-----------------------------------------------");
-    }
-
-    // Método para extrair resoluções e retorná-las em formato String
-    private static String extractResolutions(Document movieDoc) {
+    private static ArrayNode extractResolutions(Document movieDoc, ObjectMapper objectMapper) {
         Elements resolutionElements = movieDoc.select(".modal-torrent");
 
-        StringBuilder resolutions = new StringBuilder();
-
-        // Regex para identificar o tamanho do arquivo (ex: "5.54 GB" ou "814.81 MB")
+        ArrayNode resolutionsArray = objectMapper.createArrayNode();
         String fileSizeRegex = "(\\d+(?:\\.\\d+)?\\s(?:GB|MB))";
 
         for (Element resolutionElement : resolutionElements) {
-            // Resolução principal (720p, 1080p, etc.)
-            String resolution = resolutionElement.selectFirst(".modal-quality span").text(); // Ex: 720p, 1080p
+            ObjectNode resolutionNode = objectMapper.createObjectNode();
+            String resolution = resolutionElement.selectFirst(".modal-quality span").text();
+            resolutionNode.put("Qualidade", resolution);
 
-            // Pegamos todos os valores concatenados por ponto, como "WEB.x265.10bit"
-            String concatenatedQualities = resolutionElement.select(".quality-size").text(); // Ex: "WEB.x265.10bit.5.54 GB"
-
-            // Extraímos o tamanho do arquivo usando regex
+            String concatenatedQualities = resolutionElement.select(".quality-size").text();
             Pattern pattern = Pattern.compile(fileSizeRegex);
             Matcher matcher = pattern.matcher(concatenatedQualities);
             String fileSize = "";
 
-            // Verifica se encontramos o tamanho do arquivo
             if (matcher.find()) {
-                fileSize = matcher.group(1); // Captura o tamanho do arquivo (ex: "5.54 GB")
-                // Removemos o tamanho do arquivo da string concatenada para evitar problemas
+                fileSize = matcher.group(1);
                 concatenatedQualities = concatenatedQualities.replace(fileSize, "").trim();
             }
+            resolutionNode.put("Tamanho do arquivo", fileSize);
 
-            // Dividimos os valores restantes com base no ponto, agora sem o tamanho do arquivo
+            ArrayNode technicalDetailsArray = objectMapper.createArrayNode();
             String[] qualities = concatenatedQualities.split("\\.");
-
-            // Loop para adicionar cada parte ao vetor dinâmico
-            StringBuilder qualityDetails = new StringBuilder(resolution);
             for (String part : qualities) {
-                qualityDetails.append(" ").append(part);
+                technicalDetailsArray.add(part.trim());
             }
+            resolutionNode.set("Detalhes técnicos", technicalDetailsArray);
 
-            // Adiciona o tamanho do arquivo
-            if (!fileSize.isEmpty()) {
-                qualityDetails.append(" (").append(fileSize).append(")");
-            }
-
-            // Links
             String torrentLink = resolutionElement.selectFirst(".download-torrent").attr("href");
             String magnetLink = resolutionElement.selectFirst(".magnet-download").attr("href");
+            resolutionNode.put("Link Torrent", torrentLink);
+            resolutionNode.put("Magnet", magnetLink);
 
-            // Formata o resultado final
-            String formattedDetails = qualityDetails.toString() + "\n"
-                    + "Link Torrent: " + torrentLink + "\n"
-                    + "Magnet: " + magnetLink + "\n";
-
-            // Adiciona ao StringBuilder
-            resolutions.append(formattedDetails).append("\n");
+            resolutionsArray.add(resolutionNode);
         }
 
-        return resolutions.length() > 0 ? resolutions.toString().trim() : "Resoluções desconhecidas";
-    }
-
-    // Método auxiliar para capitalizar a primeira letra de uma string
-    private static String capitalizeFirstLetter(String text) {
-        if (text == null || text.isEmpty()) {
-            return text;
-        }
-        return text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
-    }
-
-    // Função para tentar acessar uma página com retries
-    private static Document accessPageWithRetry(String url, int maxRetries) throws IOException {
-        int retries = 0;
-        Document doc = null;
-
-        while (retries < maxRetries) {
-            try {
-                doc = Jsoup.connect(url)
-                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
-                        .timeout(10 * 1000).get();
-                break; // Sucesso, sai do loop
-            } catch (IOException e) {
-                retries++;
-                System.out.println("Tentativa " + retries + " falhou para " + url);
-                if (retries >= maxRetries) {
-                    throw e; // Lança exceção se atingir o número máximo de tentativas
-                }
-            }
-        }
-        return doc;
+        return resolutionsArray;
     }
 }
