@@ -3,7 +3,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class YTSScraper {
@@ -61,7 +60,7 @@ public class YTSScraper {
         return true;
     }
 
-    private static void extractMovieDetails(Element movie) throws IOException {
+    private static void extractMovieDetails(Element movie) {
         // Captura o nome do filme e o link da página principal
         String movieName = movie.select(".browse-movie-title").text();
         String movieLink = movie.select(".browse-movie-link").attr("href");
@@ -76,74 +75,61 @@ public class YTSScraper {
             idiomaAbreviado = abreviacaoIdioma;
         }
 
-        // Conectando à página interna do filme para obter mais detalhes, incluindo o idioma por extenso
-        Document movieDoc = Jsoup.connect(movieLink)
-                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
-                .get();
-
-        // Pegando o título do filme na página interna
-        Element movieTitleInternalElement = movieDoc.selectFirst("h1[itemprop=name]");
-        String movieTitle = movieTitleInternalElement != null ? movieTitleInternalElement.text() : "Título desconhecido";
-
-        // Pegando o ano e o idioma por extenso da página interna
-        Elements h2Elements = movieDoc.select("h2");
-        String year = h2Elements.size() > 0 ? h2Elements.get(0).text() : "Ano desconhecido";
-
-        // Verifica se o ano contém colchetes e captura o idioma por extenso
-        if (year.contains("[")) {
-            String[] yearParts = year.split("\\[");  // Divide o ano e o idioma
-            year = yearParts[0].trim();  // Mantém o ano puro
-            idiomaExtenso = yearParts[1].replace("]", "").trim();  // Captura o idioma por extenso (ex: Spanish, Hindi)
-        }
-
-        // Pegando o gênero do filme na página interna
-        String genres = h2Elements.size() > 1 ? h2Elements.get(1).text() : "Gênero desconhecido";
-
-        // Pegando a sinopse (na página interna)
-        Element synopsisElement = movieDoc.selectFirst("#synopsis p");
-        String synopsis = synopsisElement != null ? synopsisElement.text() : "Sinopse não disponível";
-
-        // Pegando a duração do filme
-        Element runtimeElement = movieDoc.selectFirst(".tech-spec-element .icon-clock");
-        String runtime = runtimeElement != null ? runtimeElement.parent().text().trim() : "Duração desconhecida";
-
-        // Pegando o elenco
-        Element castElement = movieDoc.selectFirst(".actors .list-cast .name-cast");
-        String cast = castElement != null ? castElement.text() : "Elenco desconhecido";
-
-        // Pegando o diretor
-        Element directorElement = movieDoc.selectFirst(".directors .list-cast .name-cast");
-        String director = directorElement != null ? directorElement.text() : "Diretor desconhecido";
-
-        // Exibir todos os detalhes do filme no console
-        System.out.println("Filme: " + movieTitle);
-        System.out.println("Ano: " + year);
-        System.out.println("Idioma: " + idiomaAbreviado + " " + capitalizeFirstLetter(idiomaExtenso));
-        System.out.println("Gêneros: " + genres);
-        System.out.println("Sinopse: " + synopsis);
-        System.out.println("Duração: " + runtime);
-        System.out.println("Elenco: " + cast);
-        System.out.println("Diretor: " + director);
-        System.out.println("-----------------------------------------------");
-    }
-
-
-    // Função para salvar o HTML bruto em um arquivo .txt para futura análise
-    private static void saveRawPage(String movieLink, String movieName) {
         try {
+            // Conectando à página interna do filme para obter mais detalhes, incluindo o idioma por extenso
             Document movieDoc = Jsoup.connect(movieLink)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
                     .get();
 
-            // Define o nome do arquivo com base no nome do filme
-            String fileName = "raw_" + movieName.replaceAll("[^a-zA-Z0-9]", "_") + ".txt";
+            // Pegando o título do filme na página interna
+            Element movieTitleInternalElement = movieDoc.selectFirst("h1[itemprop=name]");
+            String movieTitle = movieTitleInternalElement != null ? movieTitleInternalElement.text() : "Título desconhecido";
 
-            try (FileWriter fileWriter = new FileWriter(fileName)) {
-                fileWriter.write(movieDoc.outerHtml());
-                System.out.println("Página raw salva para análise: " + fileName);
+            // Pegando o ano e o idioma por extenso da página interna
+            Elements h2Elements = movieDoc.select("h2");
+            String year = h2Elements.size() > 0 ? h2Elements.get(0).text() : "Ano desconhecido";
+
+            // Verifica se o ano contém colchetes e captura o idioma por extenso
+            if (year.contains("[")) {
+                String[] yearParts = year.split("\\[");  // Divide o ano e o idioma
+                year = yearParts[0].trim();  // Mantém o ano puro
+                idiomaExtenso = yearParts[1].replace("]", "").trim();  // Captura o idioma por extenso (ex: Spanish, Hindi)
             }
+
+            // Pegando o gênero do filme na página interna
+            String genres = h2Elements.size() > 1 ? h2Elements.get(1).text() : "Gênero desconhecido";
+
+            // Pegando a sinopse (na página interna)
+            Element synopsisElement = movieDoc.selectFirst("#synopsis p");
+            String synopsis = synopsisElement != null ? synopsisElement.text() : "Sinopse não disponível";
+
+            // Pegando a duração do filme
+            Element runtimeElement = movieDoc.selectFirst(".tech-spec-element .icon-clock");
+            String runtime = runtimeElement != null ? runtimeElement.parent().text().trim() : "Duração desconhecida";
+
+            // Pegando o elenco
+            Element castElement = movieDoc.selectFirst(".actors .list-cast .name-cast");
+            String cast = castElement != null ? castElement.text() : "Elenco desconhecido";
+
+            // Pegando o diretor
+            Element directorElement = movieDoc.selectFirst(".directors .list-cast .name-cast");
+            String director = directorElement != null ? directorElement.text() : "Diretor desconhecido";
+
+            // Exibir todos os detalhes do filme no console
+            System.out.println("Filme: " + movieTitle);
+            System.out.println("Ano: " + year);
+            System.out.println("Idioma: " + idiomaAbreviado + " " + capitalizeFirstLetter(idiomaExtenso));
+            System.out.println("Gêneros: " + genres);
+            System.out.println("Sinopse: " + synopsis);
+            System.out.println("Duração: " + runtime);
+            System.out.println("Elenco: " + cast);
+            System.out.println("Diretor: " + director);
+            System.out.println("-----------------------------------------------");
+
         } catch (IOException e) {
-            System.out.println("Erro ao salvar a página raw: " + e.getMessage());
+            // Exibe mensagem de erro caso ocorra um problema ao acessar a página do filme
+            System.out.println("Erro ao acessar a página do filme: " + movieLink);
+            System.out.println("Motivo: " + e.getMessage());
         }
     }
 
