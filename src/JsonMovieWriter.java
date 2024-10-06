@@ -46,9 +46,24 @@ public class JsonMovieWriter {
                                  String cast, String director, String availableResolutions) {
         boolean isUpdated = false;
         ObjectNode movieNode = objectMapper.createObjectNode();
+
+        // Adicionando "Ano"
         movieNode.put("Ano", year);
-        movieNode.put("Idioma", idiomaAbreviado + " " + capitalizeFirstLetter(idiomaExtenso));
-        movieNode.put("Gêneros", String.join(" / ", genres));
+
+        // Adicionando "Idioma" como um array
+        ArrayNode idiomaArray = objectMapper.createArrayNode();
+        idiomaArray.add(idiomaAbreviado);
+        idiomaArray.add(idiomaExtenso);
+        movieNode.set("Idioma", idiomaArray);
+
+        // Adicionando "Gêneros" como um array
+        ArrayNode genresArray = objectMapper.createArrayNode();
+        for (String genre : genres) {
+            genresArray.add(genre);
+        }
+        movieNode.set("Gêneros", genresArray);
+
+        // Adicionando outros detalhes do filme
         movieNode.put("Link da página", movieLink);
         movieNode.put("Capa", movieCover);
         movieNode.put("Trailer", trailerLink);
