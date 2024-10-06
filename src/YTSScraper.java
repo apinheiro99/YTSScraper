@@ -67,13 +67,14 @@ public class YTSScraper {
         String movieLink = movie.select(".browse-movie-link").attr("href");
 
         String idiomaAbreviado = getIdiomaAbreviado(movieName);
-        String idiomaExtenso = "English"; // Valor padrão para idioma extenso
+        String[] idiomaExtensoHolder = new String[]{"English"}; // Usar um array para armazenar o idioma extenso
 
         try {
             Document movieDoc = connectToMoviePage(movieLink);
 
             String movieTitle = extractMovieTitle(movieDoc);
-            String year = extractYearAndIdioma(movieDoc, idiomaExtenso);
+            String year = extractYearAndIdioma(movieDoc, idiomaExtensoHolder);
+            String idiomaExtenso = idiomaExtensoHolder[0]; // Recupera o valor atualizado do idioma extenso
             String genres = extractGenres(movieDoc);
             String synopsis = extractSynopsis(movieDoc);
             String runtime = extractRuntime(movieDoc);
@@ -113,12 +114,12 @@ public class YTSScraper {
         return movieTitleInternalElement != null ? movieTitleInternalElement.text() : "N/A";
     }
 
-    private static String extractYearAndIdioma(Document movieDoc, String idiomaExtenso) {
+    private static String extractYearAndIdioma(Document movieDoc, String[] idiomaExtensoHolder) {
         Elements h2Elements = movieDoc.select("h2");
         String year = h2Elements.size() > 0 ? h2Elements.get(0).text() : "N/A";
         if (year.contains("[")) {
             String[] yearParts = year.split("\\[");
-            idiomaExtenso = yearParts[1].replace("]", "").trim();
+            idiomaExtensoHolder[0] = yearParts[1].replace("]", "").trim();
             return yearParts[0].trim();
         }
         return year;
