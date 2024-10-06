@@ -82,11 +82,11 @@ public class YTSScraper {
 
             // Pegando o título do filme na página interna
             Element movieTitleInternalElement = movieDoc.selectFirst("h1[itemprop=name]");
-            String movieTitle = movieTitleInternalElement != null ? movieTitleInternalElement.text() : "Título desconhecido";
+            String movieTitle = movieTitleInternalElement != null ? movieTitleInternalElement.text() : "N/A";
 
             // Pegando o ano e o idioma por extenso da página interna
             Elements h2Elements = movieDoc.select("h2");
-            String year = h2Elements.size() > 0 ? h2Elements.get(0).text() : "Ano desconhecido";
+            String year = h2Elements.size() > 0 ? h2Elements.get(0).text() : "N/A";
             if (year.contains("[")) {
                 String[] yearParts = year.split("\\[");
                 year = yearParts[0].trim();
@@ -94,43 +94,71 @@ public class YTSScraper {
             }
 
             // Pegando o gênero do filme na página interna
-            String genres = h2Elements.size() > 1 ? h2Elements.get(1).text() : "Gênero desconhecido";
+            String genres = h2Elements.size() > 1 ? h2Elements.get(1).text() : "N/A";
 
             // Pegando a sinopse (na página interna)
             Element synopsisElement = movieDoc.selectFirst("#synopsis p");
-            String synopsis = synopsisElement != null ? synopsisElement.text() : "Sinopse não disponível";
+            String synopsis = synopsisElement != null ? synopsisElement.text() : "N/A";
 
             // Pegando a duração do filme
             Element runtimeElement = movieDoc.selectFirst(".tech-spec-element .icon-clock");
-            String runtime = runtimeElement != null ? runtimeElement.parent().text().trim() : "Duração desconhecida";
+            String runtime = runtimeElement != null ? runtimeElement.parent().text().trim() : "N/A";
 
             // Pegando o elenco
             Element castElement = movieDoc.selectFirst(".actors .list-cast .name-cast");
-            String cast = castElement != null ? castElement.text() : "Elenco desconhecido";
+            String cast = castElement != null ? castElement.text() : "N/A";
 
             // Pegando o diretor
             Element directorElement = movieDoc.selectFirst(".directors .list-cast .name-cast");
-            String director = directorElement != null ? directorElement.text() : "Diretor desconhecido";
+            String director = directorElement != null ? directorElement.text() : "N/A";
 
             // Pegando o link do trailer
             Element trailerElement = movieDoc.selectFirst("a.youtube");
-            String trailerLink = trailerElement != null ? trailerElement.attr("href") : "Trailer não disponível";
+            String trailerLink = trailerElement != null ? trailerElement.attr("href") : "N/A";
 
             // Pegando a capa do filme
             Element coverElement = movieDoc.selectFirst("#movie-poster img");
-            String movieCover = coverElement != null ? coverElement.attr("src") : "Capa não disponível";
+            String movieCover = coverElement != null ? coverElement.attr("src") : "N/A";
 
-            // Pegando o link e rating do IMDb
+            // Pegando o link do IMDb
             Element imdbLinkElement = movieDoc.selectFirst("a[title='IMDb Rating']");
-            String imdbLink = imdbLinkElement != null ? imdbLinkElement.attr("href") : "IMDb link não disponível";
+            String imdbLink = imdbLinkElement != null ? imdbLinkElement.attr("href") : "N/A";
 
-            Element imdbRatingElement = movieDoc.selectFirst("span[itemprop='ratingValue']");
-            String imdbRating = imdbRatingElement != null ? imdbRatingElement.text() : "Nota IMDb não disponível";
+            // Pegando o rating do IMDb ou do YTS
+            String imdbRating = "N/A";  // Valor padrão
+
+// Tentar pegar o IMDb Rating do YTS pelo número de likes se o IMDb falhar
+            Element ytsRatingElement = movieDoc.selectFirst("#movie-likes");
+            String ytsRating = ytsRatingElement != null ? ytsRatingElement.text() : "N/A";
+
+// Se o link do IMDb estiver disponível, tenta acessar a página do IMDb para pegar o rating atualizado
+            if (!imdbLink.equals("N/A")) {
+                try {
+                    Document imdbDoc = Jsoup.connect(imdbLink)
+                            .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
+                            .get();
+
+                    // Pegando a avaliação atualizada do IMDb na página do IMDb
+                    Element imdbRatingElement = imdbDoc.selectFirst("div[data-testid='hero-rating-bar__aggregate-rating__score'] span.sc-d541859f-1");
+                    if (imdbRatingElement != null) {
+                        imdbRating = imdbRatingElement.text(); // Usar o rating do IMDb se disponível
+                    } else {
+                        imdbRating = ytsRating; // Usar o rating do YTS se o IMDb falhar
+                    }
+
+                } catch (IOException e) {
+                    System.out.println("Erro ao acessar a página do IMDb: " + imdbLink);
+                    System.out.println("Motivo: " + e.getMessage());
+                    imdbRating = ytsRating; // Usar o rating do YTS se houver falha ao acessar o IMDb
+                }
+            } else {
+                imdbRating = ytsRating; // Usar o rating do YTS se o IMDb não estiver disponível
+            }
 
             // Chamar o método para extrair resoluções
             String availableResolutions = extractResolutions(movieDoc);
 
-            // Exibe os detalhes do filme, incluindo o link da página, URL da capa, link do trailer, IMDb e rating
+            // Exibe os detalhes do filme, incluindo o link da página, URL da capa, link do trailer, IMDb e rating atualizado
             System.out.println("Filme: " + movieTitle);
             System.out.println("Ano: " + year);
             System.out.println("Idioma: " + idiomaAbreviado + " " + capitalizeFirstLetter(idiomaExtenso));
@@ -139,12 +167,12 @@ public class YTSScraper {
             System.out.println("Capa: " + movieCover); // URL da capa
             System.out.println("Trailer: " + trailerLink); // Link do trailer
             System.out.println("IMDb: " + imdbLink); // Link IMDb
-            System.out.println("IMDb Rating: " + imdbRating); // Nota IMDb
+            System.out.println("IMDb Rating: " + imdbRating); // Nota IMDb ou YTS Rating
             System.out.println("Sinopse: " + synopsis);
             System.out.println("Duração: " + runtime);
             System.out.println("Elenco: " + cast);
             System.out.println("Diretor: " + director);
-            System.out.println("Resoluções disponíveis:\n" + availableResolutions);
+            System.out.println("Resoluções:\n" + availableResolutions);
             System.out.println("-----------------------------------------------");
 
         } catch (IOException e) {
