@@ -75,7 +75,7 @@ public class YTSScraper {
             String movieTitle = extractMovieTitle(movieDoc);
             String year = extractYearAndIdioma(movieDoc, idiomaExtensoHolder);
             String idiomaExtenso = idiomaExtensoHolder[0]; // Recupera o valor atualizado do idioma extenso
-            String genres = extractGenres(movieDoc);
+            String[] genres = extractGenres(movieDoc);
             String synopsis = extractSynopsis(movieDoc);
             String runtime = extractRuntime(movieDoc);
             String cast = extractCast(movieDoc);
@@ -94,7 +94,7 @@ public class YTSScraper {
         }
     }
 
-// Funções auxiliares para cada extração
+    // Funções auxiliares para cada extração
 
     private static String getIdiomaAbreviado(String movieName) {
         if (movieName.startsWith("[")) {
@@ -125,9 +125,10 @@ public class YTSScraper {
         return year;
     }
 
-    private static String extractGenres(Document movieDoc) {
+    private static String[] extractGenres(Document movieDoc) {
         Elements h2Elements = movieDoc.select("h2");
-        return h2Elements.size() > 1 ? h2Elements.get(1).text() : "N/A";
+        String genres = h2Elements.size() > 1 ? h2Elements.get(1).text() : "N/A";
+        return genres.equals("N/A") ? new String[]{"N/A"} : genres.split("\\s*/\\s*");
     }
 
     private static String extractSynopsis(Document movieDoc) {
@@ -196,13 +197,13 @@ public class YTSScraper {
     }
 
     private static void printMovieDetails(String movieTitle, String year, String idiomaAbreviado, String idiomaExtenso,
-                                          String genres, String movieLink, String movieCover, String trailerLink,
+                                          String[] genres, String movieLink, String movieCover, String trailerLink,
                                           String imdbLink, String imdbRating, String synopsis, String runtime,
                                           String cast, String director, String availableResolutions) {
         System.out.println("Filme: " + movieTitle);
         System.out.println("Ano: " + year);
         System.out.println("Idioma: " + idiomaAbreviado + " " + capitalizeFirstLetter(idiomaExtenso));
-        System.out.println("Gêneros: " + genres);
+        System.out.println("Gêneros: " + String.join(" / ", genres));  // Exibindo os gêneros com barra
         System.out.println("Link da página: " + movieLink);
         System.out.println("Capa: " + movieCover);
         System.out.println("Trailer: " + trailerLink);
