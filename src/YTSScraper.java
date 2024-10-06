@@ -61,127 +61,159 @@ public class YTSScraper {
         return true;
     }
 
-    // Função para extrair todos os detalhes do filme em uma única operação
+    // Função principal para extrair detalhes do filme
     private static void extractMovieDetails(Element movie) {
         String movieName = movie.select(".browse-movie-title").text();
-        String movieLink = movie.select(".browse-movie-link").attr("href"); // Link do filme
+        String movieLink = movie.select(".browse-movie-link").attr("href");
 
-        String idiomaAbreviado = "[EN]";
-        String idiomaExtenso = "English";
-
-        if (movieName.startsWith("[")) {
-            String abreviacaoIdioma = movieName.substring(0, movieName.indexOf("]") + 1);
-            idiomaAbreviado = abreviacaoIdioma;
-        }
+        String idiomaAbreviado = getIdiomaAbreviado(movieName);
+        String idiomaExtenso = "English"; // Valor padrão para idioma extenso
 
         try {
-            // Conectando à página interna do filme para obter mais detalhes
-            Document movieDoc = Jsoup.connect(movieLink)
-                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
-                    .get();
+            Document movieDoc = connectToMoviePage(movieLink);
 
-            // Pegando o título do filme na página interna
-            Element movieTitleInternalElement = movieDoc.selectFirst("h1[itemprop=name]");
-            String movieTitle = movieTitleInternalElement != null ? movieTitleInternalElement.text() : "N/A";
-
-            // Pegando o ano e o idioma por extenso da página interna
-            Elements h2Elements = movieDoc.select("h2");
-            String year = h2Elements.size() > 0 ? h2Elements.get(0).text() : "N/A";
-            if (year.contains("[")) {
-                String[] yearParts = year.split("\\[");
-                year = yearParts[0].trim();
-                idiomaExtenso = yearParts[1].replace("]", "").trim();
-            }
-
-            // Pegando o gênero do filme na página interna
-            String genres = h2Elements.size() > 1 ? h2Elements.get(1).text() : "N/A";
-
-            // Pegando a sinopse (na página interna)
-            Element synopsisElement = movieDoc.selectFirst("#synopsis p");
-            String synopsis = synopsisElement != null ? synopsisElement.text() : "N/A";
-
-            // Pegando a duração do filme
-            Element runtimeElement = movieDoc.selectFirst(".tech-spec-element .icon-clock");
-            String runtime = runtimeElement != null ? runtimeElement.parent().text().trim() : "N/A";
-
-            // Pegando o elenco
-            Element castElement = movieDoc.selectFirst(".actors .list-cast .name-cast");
-            String cast = castElement != null ? castElement.text() : "N/A";
-
-            // Pegando o diretor
-            Element directorElement = movieDoc.selectFirst(".directors .list-cast .name-cast");
-            String director = directorElement != null ? directorElement.text() : "N/A";
-
-            // Pegando o link do trailer
-            Element trailerElement = movieDoc.selectFirst("a.youtube");
-            String trailerLink = trailerElement != null ? trailerElement.attr("href") : "N/A";
-
-            // Pegando a capa do filme
-            Element coverElement = movieDoc.selectFirst("#movie-poster img");
-            String movieCover = coverElement != null ? coverElement.attr("src") : "N/A";
-
-            // Pegando o link do IMDb
-            Element imdbLinkElement = movieDoc.selectFirst("a[title='IMDb Rating']");
-            String imdbLink = imdbLinkElement != null ? imdbLinkElement.attr("href") : "N/A";
-
-            // Pegando o rating do IMDb ou do YTS
-            String imdbRating = "N/A";  // Valor padrão
-
-// Tentar pegar o IMDb Rating do YTS pelo número de likes se o IMDb falhar
-            Element ytsRatingElement = movieDoc.selectFirst("#movie-likes");
-            String ytsRating = ytsRatingElement != null ? ytsRatingElement.text() : "N/A";
-
-// Se o link do IMDb estiver disponível, tenta acessar a página do IMDb para pegar o rating atualizado
-            if (!imdbLink.equals("N/A")) {
-                try {
-                    Document imdbDoc = Jsoup.connect(imdbLink)
-                            .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
-                            .get();
-
-                    // Pegando a avaliação atualizada do IMDb na página do IMDb
-                    Element imdbRatingElement = imdbDoc.selectFirst("div[data-testid='hero-rating-bar__aggregate-rating__score'] span.sc-d541859f-1");
-                    if (imdbRatingElement != null) {
-                        imdbRating = imdbRatingElement.text(); // Usar o rating do IMDb se disponível
-                    } else {
-                        imdbRating = ytsRating; // Usar o rating do YTS se o IMDb falhar
-                    }
-
-                } catch (IOException e) {
-                    System.out.println("Erro ao acessar a página do IMDb: " + imdbLink);
-                    System.out.println("Motivo: " + e.getMessage());
-                    imdbRating = ytsRating; // Usar o rating do YTS se houver falha ao acessar o IMDb
-                }
-            } else {
-                imdbRating = ytsRating; // Usar o rating do YTS se o IMDb não estiver disponível
-            }
-
-            // Chamar o método para extrair resoluções
+            String movieTitle = extractMovieTitle(movieDoc);
+            String year = extractYearAndIdioma(movieDoc, idiomaExtenso);
+            String genres = extractGenres(movieDoc);
+            String synopsis = extractSynopsis(movieDoc);
+            String runtime = extractRuntime(movieDoc);
+            String cast = extractCast(movieDoc);
+            String director = extractDirector(movieDoc);
+            String trailerLink = extractTrailerLink(movieDoc);
+            String movieCover = extractMovieCover(movieDoc);
+            String imdbLink = extractImdbLink(movieDoc);
+            String imdbRating = fetchImdbOrYtsRating(imdbLink, movieDoc);
             String availableResolutions = extractResolutions(movieDoc);
 
-            // Exibe os detalhes do filme, incluindo o link da página, URL da capa, link do trailer, IMDb e rating atualizado
-            System.out.println("Filme: " + movieTitle);
-            System.out.println("Ano: " + year);
-            System.out.println("Idioma: " + idiomaAbreviado + " " + capitalizeFirstLetter(idiomaExtenso));
-            System.out.println("Gêneros: " + genres);
-            System.out.println("Link da página: " + movieLink); // Link da página
-            System.out.println("Capa: " + movieCover); // URL da capa
-            System.out.println("Trailer: " + trailerLink); // Link do trailer
-            System.out.println("IMDb: " + imdbLink); // Link IMDb
-            System.out.println("IMDb Rating: " + imdbRating); // Nota IMDb ou YTS Rating
-            System.out.println("Sinopse: " + synopsis);
-            System.out.println("Duração: " + runtime);
-            System.out.println("Elenco: " + cast);
-            System.out.println("Diretor: " + director);
-            System.out.println("Resoluções:\n" + availableResolutions);
-            System.out.println("-----------------------------------------------");
-
+            printMovieDetails(movieTitle, year, idiomaAbreviado, idiomaExtenso, genres, movieLink, movieCover,
+                    trailerLink, imdbLink, imdbRating, synopsis, runtime, cast, director, availableResolutions);
         } catch (IOException e) {
             System.out.println("Erro ao acessar a página do filme: " + movieLink);
             System.out.println("Motivo: " + e.getMessage());
         }
     }
 
+// Funções auxiliares para cada extração
 
+    private static String getIdiomaAbreviado(String movieName) {
+        if (movieName.startsWith("[")) {
+            return movieName.substring(0, movieName.indexOf("]") + 1);
+        }
+        return "[EN]";
+    }
+
+    private static Document connectToMoviePage(String movieLink) throws IOException {
+        return Jsoup.connect(movieLink)
+                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
+                .get();
+    }
+
+    private static String extractMovieTitle(Document movieDoc) {
+        Element movieTitleInternalElement = movieDoc.selectFirst("h1[itemprop=name]");
+        return movieTitleInternalElement != null ? movieTitleInternalElement.text() : "N/A";
+    }
+
+    private static String extractYearAndIdioma(Document movieDoc, String idiomaExtenso) {
+        Elements h2Elements = movieDoc.select("h2");
+        String year = h2Elements.size() > 0 ? h2Elements.get(0).text() : "N/A";
+        if (year.contains("[")) {
+            String[] yearParts = year.split("\\[");
+            idiomaExtenso = yearParts[1].replace("]", "").trim();
+            return yearParts[0].trim();
+        }
+        return year;
+    }
+
+    private static String extractGenres(Document movieDoc) {
+        Elements h2Elements = movieDoc.select("h2");
+        return h2Elements.size() > 1 ? h2Elements.get(1).text() : "N/A";
+    }
+
+    private static String extractSynopsis(Document movieDoc) {
+        Element synopsisElement = movieDoc.selectFirst("#synopsis p");
+        return synopsisElement != null ? synopsisElement.text() : "N/A";
+    }
+
+    private static String extractRuntime(Document movieDoc) {
+        Element runtimeElement = movieDoc.selectFirst(".tech-spec-element .icon-clock");
+        return runtimeElement != null ? runtimeElement.parent().text().trim() : "N/A";
+    }
+
+    private static String extractCast(Document movieDoc) {
+        Element castElement = movieDoc.selectFirst(".actors .list-cast .name-cast");
+        return castElement != null ? castElement.text() : "N/A";
+    }
+
+    private static String extractDirector(Document movieDoc) {
+        Element directorElement = movieDoc.selectFirst(".directors .list-cast .name-cast");
+        return directorElement != null ? directorElement.text() : "N/A";
+    }
+
+    private static String extractTrailerLink(Document movieDoc) {
+        Element trailerElement = movieDoc.selectFirst("a.youtube");
+        return trailerElement != null ? trailerElement.attr("href") : "N/A";
+    }
+
+    private static String extractMovieCover(Document movieDoc) {
+        Element coverElement = movieDoc.selectFirst("#movie-poster img");
+        return coverElement != null ? coverElement.attr("src") : "N/A";
+    }
+
+    private static String extractImdbLink(Document movieDoc) {
+        Element imdbLinkElement = movieDoc.selectFirst("a[title='IMDb Rating']");
+        return imdbLinkElement != null ? imdbLinkElement.attr("href") : "N/A";
+    }
+
+    private static String fetchImdbOrYtsRating(String imdbLink, Document movieDoc) {
+        String imdbRating = "N/A";
+        if (!imdbLink.equals("N/A")) {
+            imdbRating = fetchImdbRating(imdbLink);
+        }
+        if (imdbRating.equals("N/A")) {
+            imdbRating = extractYtsRating(movieDoc);
+        }
+        return imdbRating;
+    }
+
+    private static String fetchImdbRating(String imdbLink) {
+        try {
+            Document imdbDoc = Jsoup.connect(imdbLink)
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
+                    .get();
+            Element imdbRatingElement = imdbDoc.selectFirst("div[data-testid='hero-rating-bar__aggregate-rating__score'] span.sc-d541859f-1");
+            return imdbRatingElement != null ? imdbRatingElement.text() : "N/A";
+        } catch (IOException e) {
+            System.out.println("Erro ao acessar a página do IMDb: " + imdbLink);
+            System.out.println("Motivo: " + e.getMessage());
+            return "N/A";
+        }
+    }
+
+    private static String extractYtsRating(Document movieDoc) {
+        Element ytsRatingElement = movieDoc.selectFirst("#movie-likes");
+        return ytsRatingElement != null ? ytsRatingElement.text() : "N/A";
+    }
+
+    private static void printMovieDetails(String movieTitle, String year, String idiomaAbreviado, String idiomaExtenso,
+                                          String genres, String movieLink, String movieCover, String trailerLink,
+                                          String imdbLink, String imdbRating, String synopsis, String runtime,
+                                          String cast, String director, String availableResolutions) {
+        System.out.println("Filme: " + movieTitle);
+        System.out.println("Ano: " + year);
+        System.out.println("Idioma: " + idiomaAbreviado + " " + capitalizeFirstLetter(idiomaExtenso));
+        System.out.println("Gêneros: " + genres);
+        System.out.println("Link da página: " + movieLink);
+        System.out.println("Capa: " + movieCover);
+        System.out.println("Trailer: " + trailerLink);
+        System.out.println("IMDb: " + imdbLink);
+        System.out.println("IMDb Rating: " + imdbRating);
+        System.out.println("Sinopse: " + synopsis);
+        System.out.println("Duração: " + runtime);
+        System.out.println("Elenco: " + cast);
+        System.out.println("Diretor: " + director);
+        System.out.println("Resoluções:\n" + availableResolutions);
+        System.out.println("-----------------------------------------------");
+    }
 
     // Método para extrair resoluções e retorná-las em formato String
     private static String extractResolutions(Document movieDoc) {
