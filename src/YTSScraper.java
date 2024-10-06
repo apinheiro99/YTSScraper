@@ -120,10 +120,17 @@ public class YTSScraper {
             Element coverElement = movieDoc.selectFirst("#movie-poster img");
             String movieCover = coverElement != null ? coverElement.attr("src") : "Capa não disponível";
 
+            // Pegando o link e rating do IMDb
+            Element imdbLinkElement = movieDoc.selectFirst("a[title='IMDb Rating']");
+            String imdbLink = imdbLinkElement != null ? imdbLinkElement.attr("href") : "IMDb link não disponível";
+
+            Element imdbRatingElement = movieDoc.selectFirst("span[itemprop='ratingValue']");
+            String imdbRating = imdbRatingElement != null ? imdbRatingElement.text() : "Nota IMDb não disponível";
+
             // Chamar o método para extrair resoluções
             String availableResolutions = extractResolutions(movieDoc);
 
-            // Exibe os detalhes do filme, incluindo o link da página, URL da capa e o link do trailer
+            // Exibe os detalhes do filme, incluindo o link da página, URL da capa, link do trailer, IMDb e rating
             System.out.println("Filme: " + movieTitle);
             System.out.println("Ano: " + year);
             System.out.println("Idioma: " + idiomaAbreviado + " " + capitalizeFirstLetter(idiomaExtenso));
@@ -131,6 +138,8 @@ public class YTSScraper {
             System.out.println("Link da página: " + movieLink); // Link da página
             System.out.println("Capa: " + movieCover); // URL da capa
             System.out.println("Trailer: " + trailerLink); // Link do trailer
+            System.out.println("IMDb: " + imdbLink); // Link IMDb
+            System.out.println("IMDb Rating: " + imdbRating); // Nota IMDb
             System.out.println("Sinopse: " + synopsis);
             System.out.println("Duração: " + runtime);
             System.out.println("Elenco: " + cast);
@@ -143,6 +152,7 @@ public class YTSScraper {
             System.out.println("Motivo: " + e.getMessage());
         }
     }
+
 
 
     // Método para extrair resoluções e retorná-las em formato String
