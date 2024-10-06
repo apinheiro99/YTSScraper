@@ -86,13 +86,15 @@ public class YTSScraper {
             String imdbRating = fetchImdbOrYtsRating(imdbLink, movieDoc);
             String availableResolutions = extractResolutions(movieDoc);
 
-            printMovieDetails(movieTitle, year, idiomaAbreviado, idiomaExtenso, genres, movieLink, movieCover,
+            JsonMovieWriter jsonMovieWriter = new JsonMovieWriter();
+            jsonMovieWriter.addOrUpdateMovie(movieTitle, year, idiomaAbreviado, idiomaExtenso, genres, movieLink, movieCover,
                     trailerLink, imdbLink, imdbRating, synopsis, runtime, cast, director, availableResolutions);
         } catch (IOException e) {
             System.out.println("Erro ao acessar a página do filme: " + movieLink);
             System.out.println("Motivo: " + e.getMessage());
         }
     }
+
 
     // Funções auxiliares para cada extração
 
