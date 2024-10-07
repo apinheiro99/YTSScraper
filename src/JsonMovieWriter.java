@@ -61,7 +61,7 @@ public class JsonMovieWriter {
                     movieCover, trailerLink, imdbLink, imdbRating, synopsis, runtime, cast, director, availableResolutions,
                     existingUpdateCount);
 
-            hasChanges = detectChanges(existingMovie, movieNode, updatedAttributes);
+            hasChanges = detectChanges(existingMovie, movieNode, updatedAttributes); // Detecta mudanças sem logs detalhados
 
             if (hasChanges) {
                 updateExistingMovie(existingMovie, movieNode);
@@ -80,7 +80,6 @@ public class JsonMovieWriter {
         saveJsonFile();
         displayUpdateStatus(movieTitle, isUpdated, hasChanges, isNewMovie, updatedAttributes);
     }
-
 
     private ObjectNode initializeMovieNode(String movieTitle, String year, String idiomaAbreviado, String idiomaExtenso,
                                            String[] genres, String movieLink, String movieCover, String trailerLink,
@@ -119,8 +118,6 @@ public class JsonMovieWriter {
         return movieNode;
     }
 
-
-    // Método para detectar mudanças entre o filme existente e o novo e armazenar os atributos atualizados
     private boolean detectChanges(ObjectNode existingMovie, ObjectNode movieNode, List<String> updatedAttributes) {
         boolean hasChanges = false;
         Iterator<String> fieldNames = movieNode.fieldNames();
@@ -135,31 +132,12 @@ public class JsonMovieWriter {
                 if (!existingValueNode.equals(newValueNode)) {
                     updatedAttributes.add(fieldName);
                     hasChanges = true;
-
-                    // Log detalhado para diferenças detectadas
-                    displayDetailedChangeLog(fieldName, existingValueNode, newValueNode);
                 }
             }
         }
         return hasChanges;
     }
 
-    private void displayDetailedChangeLog(String fieldName, JsonNode existingValueNode, JsonNode newValueNode) {
-        if (fieldName.equals("Resoluções")) {
-            compareResolutions(existingValueNode, newValueNode);
-        } else {
-            // Log detalhado para outros campos
-            String existingValue = existingValueNode.asText();
-            String newValue = newValueNode.asText();
-
-            System.out.println("Filme: [Nome do Filme]  -->  Atributos modificados: " + fieldName);
-            System.out.println("Valor existente: \"" + existingValue + "\"");
-            System.out.println("Novo valor: \"" + newValue + "\"");
-        }
-    }
-
-
-    // Método para atualizar o filme existente com os novos dados e incrementar a contagem de atualizações
     private void updateExistingMovie(ObjectNode existingMovie, ObjectNode movieNode) {
         existingMovie.setAll(movieNode);
 
@@ -171,7 +149,6 @@ public class JsonMovieWriter {
         }
     }
 
-
     private void incrementUpdateCount(ObjectNode movieNode) {
         int updateCount = movieNode.has("Contagem de Atualizações") ? movieNode.get("Contagem de Atualizações").asInt() : 0;
         movieNode.put("Contagem de Atualizações", updateCount + 1);
@@ -181,27 +158,9 @@ public class JsonMovieWriter {
         if (isNewMovie) {
             System.out.println("Filme: " + movieTitle + "  -->  Adicionado.");
         } else if (isUpdated) {
-            System.out.print("Filme: " + movieTitle + "  -->  Atributos modificados: ");
-            System.out.println(String.join(", ", updatedAttributes));
+            System.out.println("Filme: " + movieTitle + "  -->  Atributos modificados: " + String.join(", ", updatedAttributes));
         } else {
             System.out.println("Filme: " + movieTitle + "  -->  Sem modificações.");
         }
     }
-
-    private void compareResolutions(JsonNode existingResolutions, JsonNode newResolutions) {
-        for (int i = 0; i < existingResolutions.size(); i++) {
-            JsonNode existingResolution = existingResolutions.get(i);
-            JsonNode newResolution = newResolutions.get(i);
-
-            String existingFileSize = existingResolution.get("Tamanho do arquivo").asText();
-            String newFileSize = newResolution.get("Tamanho do arquivo").asText();
-
-            if (!existingFileSize.equals(newFileSize)) {
-                System.out.println("Filme: [Nome do Filme]  -->  Atributos modificados: Resoluções");
-                System.out.println("Valor existente: \"" + existingFileSize + "\"");
-                System.out.println("Novo valor: \"" + newFileSize + "\"");
-            }
-        }
-    }
-
 }
