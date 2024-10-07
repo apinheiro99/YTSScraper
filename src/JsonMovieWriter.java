@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -81,7 +82,6 @@ public class JsonMovieWriter {
     }
 
 
-
     private ObjectNode initializeMovieNode(String movieTitle, String year, String idiomaAbreviado, String idiomaExtenso,
                                            String[] genres, String movieLink, String movieCover, String trailerLink,
                                            String imdbLink, String imdbRating, String synopsis, String runtime,
@@ -128,24 +128,35 @@ public class JsonMovieWriter {
         while (fieldNames.hasNext()) {
             String fieldName = fieldNames.next();
             if (existingMovie.has(fieldName)) {
-                String existingValue = existingMovie.get(fieldName).toString().trim();
-                String newValue = movieNode.get(fieldName).toString().trim();
+                JsonNode existingValueNode = existingMovie.get(fieldName);
+                JsonNode newValueNode = movieNode.get(fieldName);
 
-                // Comparação precisa para evitar falsos positivos
-                if (!existingValue.equals(newValue)) {
+                // Comparação direta de valores para todos os campos
+                if (!existingValueNode.equals(newValueNode)) {
                     updatedAttributes.add(fieldName);
                     hasChanges = true;
 
-                    // Log detalhado para depuração
-                    System.out.println("Diferença detectada no campo: " + fieldName);
-                    System.out.println("Valor existente: " + existingValue);
-                    System.out.println("Novo valor: " + newValue);
+                    // Log detalhado para diferenças detectadas
+                    displayDetailedChangeLog(fieldName, existingValueNode, newValueNode);
                 }
             }
         }
         return hasChanges;
     }
 
+    private void displayDetailedChangeLog(String fieldName, JsonNode existingValueNode, JsonNode newValueNode) {
+        if (fieldName.equals("Resoluções")) {
+            compareResolutions(existingValueNode, newValueNode);
+        } else {
+            // Log detalhado para outros campos
+            String existingValue = existingValueNode.asText();
+            String newValue = newValueNode.asText();
+
+            System.out.println("Filme: [Nome do Filme]  -->  Atributos modificados: " + fieldName);
+            System.out.println("Valor existente: \"" + existingValue + "\"");
+            System.out.println("Novo valor: \"" + newValue + "\"");
+        }
+    }
 
 
     // Método para atualizar o filme existente com os novos dados e incrementar a contagem de atualizações
@@ -176,4 +187,21 @@ public class JsonMovieWriter {
             System.out.println("Filme: " + movieTitle + "  -->  Sem modificações.");
         }
     }
+
+    private void compareResolutions(JsonNode existingResolutions, JsonNode newResolutions) {
+        for (int i = 0; i < existingResolutions.size(); i++) {
+            JsonNode existingResolution = existingResolutions.get(i);
+            JsonNode newResolution = newResolutions.get(i);
+
+            String existingFileSize = existingResolution.get("Tamanho do arquivo").asText();
+            String newFileSize = newResolution.get("Tamanho do arquivo").asText();
+
+            if (!existingFileSize.equals(newFileSize)) {
+                System.out.println("Filme: [Nome do Filme]  -->  Atributos modificados: Resoluções");
+                System.out.println("Valor existente: \"" + existingFileSize + "\"");
+                System.out.println("Novo valor: \"" + newFileSize + "\"");
+            }
+        }
+    }
+
 }
