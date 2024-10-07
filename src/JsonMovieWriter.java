@@ -47,11 +47,19 @@ public class JsonMovieWriter {
         boolean isNewMovie = false;
         List<String> updatedAttributes = new ArrayList<>();
 
-        ObjectNode movieNode = initializeMovieNode(movieTitle, year, idiomaAbreviado, idiomaExtenso, genres, movieLink,
-                movieCover, trailerLink, imdbLink, imdbRating, synopsis, runtime, cast, director, availableResolutions);
+        int existingUpdateCount = 0; // Contagem de atualizações existente
 
+        // Verifica se o filme já existe no JSON e obtém a contagem de atualizações existente
         if (rootNode.has(imdbId)) {
             ObjectNode existingMovie = (ObjectNode) rootNode.get(imdbId);
+            existingUpdateCount = existingMovie.has("Contagem de Atualizações") ?
+                    existingMovie.get("Contagem de Atualizações").asInt() : 0;
+
+            // Cria o novo nó de filme com a contagem de atualizações existente
+            ObjectNode movieNode = initializeMovieNode(movieTitle, year, idiomaAbreviado, idiomaExtenso, genres, movieLink,
+                    movieCover, trailerLink, imdbLink, imdbRating, synopsis, runtime, cast, director, availableResolutions,
+                    existingUpdateCount);
+
             hasChanges = detectChanges(existingMovie, movieNode, updatedAttributes);
 
             if (hasChanges) {
@@ -59,6 +67,11 @@ public class JsonMovieWriter {
                 isUpdated = true;
             }
         } else {
+            // Cria o novo nó de filme para um filme que não existe no JSON
+            ObjectNode movieNode = initializeMovieNode(movieTitle, year, idiomaAbreviado, idiomaExtenso, genres, movieLink,
+                    movieCover, trailerLink, imdbLink, imdbRating, synopsis, runtime, cast, director, availableResolutions,
+                    existingUpdateCount);
+
             rootNode.set(imdbId, movieNode);
             isNewMovie = true;
         }
@@ -67,10 +80,13 @@ public class JsonMovieWriter {
         displayUpdateStatus(movieTitle, isUpdated, hasChanges, isNewMovie, updatedAttributes);
     }
 
+
+
     private ObjectNode initializeMovieNode(String movieTitle, String year, String idiomaAbreviado, String idiomaExtenso,
                                            String[] genres, String movieLink, String movieCover, String trailerLink,
                                            String imdbLink, String imdbRating, String synopsis, String runtime,
-                                           String cast, String director, ArrayNode availableResolutions) {
+                                           String cast, String director, ArrayNode availableResolutions,
+                                           int existingUpdateCount) { // Novo parâmetro para contagem de atualizações existente
         ObjectNode movieNode = objectMapper.createObjectNode();
         movieNode.put("Título", movieTitle);
         movieNode.put("Ano", year);
@@ -96,11 +112,15 @@ public class JsonMovieWriter {
         movieNode.put("Elenco", cast);
         movieNode.put("Diretor", director);
         movieNode.set("Resoluções", availableResolutions);
-        movieNode.put("Contagem de Atualizações", 0);
+
+        // Use a contagem de atualizações existente, se fornecida; caso contrário, inicie com 0 para novos filmes
+        movieNode.put("Contagem de Atualizações", existingUpdateCount);
 
         return movieNode;
     }
 
+
+    // Método para detectar mudanças entre o filme existente e o novo e armazenar os atributos atualizados
     private boolean detectChanges(ObjectNode existingMovie, ObjectNode movieNode, List<String> updatedAttributes) {
         boolean hasChanges = false;
         Iterator<String> fieldNames = movieNode.fieldNames();
@@ -108,19 +128,38 @@ public class JsonMovieWriter {
         while (fieldNames.hasNext()) {
             String fieldName = fieldNames.next();
             if (existingMovie.has(fieldName)) {
-                if (!existingMovie.get(fieldName).toString().equals(movieNode.get(fieldName).toString())) {
+                String existingValue = existingMovie.get(fieldName).toString().trim();
+                String newValue = movieNode.get(fieldName).toString().trim();
+
+                // Comparação precisa para evitar falsos positivos
+                if (!existingValue.equals(newValue)) {
                     updatedAttributes.add(fieldName);
                     hasChanges = true;
+
+                    // Log detalhado para depuração
+                    System.out.println("Diferença detectada no campo: " + fieldName);
+                    System.out.println("Valor existente: " + existingValue);
+                    System.out.println("Novo valor: " + newValue);
                 }
             }
         }
         return hasChanges;
     }
 
+
+
+    // Método para atualizar o filme existente com os novos dados e incrementar a contagem de atualizações
     private void updateExistingMovie(ObjectNode existingMovie, ObjectNode movieNode) {
         existingMovie.setAll(movieNode);
-        incrementUpdateCount(existingMovie);
+
+        // Incrementa a contagem de atualizações somente se houver modificações reais
+        if (existingMovie.has("Contagem de Atualizações")) {
+            incrementUpdateCount(existingMovie);
+        } else {
+            existingMovie.put("Contagem de Atualizações", 1); // Inicializar contagem de atualizações se não existir
+        }
     }
+
 
     private void incrementUpdateCount(ObjectNode movieNode) {
         int updateCount = movieNode.has("Contagem de Atualizações") ? movieNode.get("Contagem de Atualizações").asInt() : 0;
