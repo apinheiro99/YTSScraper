@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class JsonMovieWriter {
     private static final String JSON_FILE_PATH = "movies.json";
@@ -37,31 +40,61 @@ public class JsonMovieWriter {
         }
     }
 
-    // Método para adicionar ou atualizar um filme no JSON
     public void addOrUpdateMovie(String movieTitle, String year, String idiomaAbreviado, String idiomaExtenso,
                                  String[] genres, String movieLink, String movieCover, String trailerLink,
                                  String imdbLink, String imdbRating, String synopsis, String runtime,
                                  String cast, String director, ArrayNode availableResolutions) {
         boolean isUpdated = false;
-        ObjectNode movieNode = objectMapper.createObjectNode();
+        boolean hasChanges = false;
+        boolean isNewMovie = false; // Flag para identificar se é um filme novo
+        List<String> updatedAttributes = new ArrayList<>();
 
-        // Adicionando "Ano"
+        ObjectNode movieNode = initializeMovieNode(year, idiomaAbreviado, idiomaExtenso, genres, movieLink, movieCover,
+                trailerLink, imdbLink, imdbRating, synopsis, runtime, cast, director, availableResolutions);
+
+        // Verificar se o filme já existe no JSON
+        if (rootNode.has(movieTitle)) {
+            ObjectNode existingMovie = (ObjectNode) rootNode.get(movieTitle);
+
+            // Verificar se houve alguma alteração nos dados do filme existente e listar as mudanças
+            hasChanges = detectChanges(existingMovie, movieNode, updatedAttributes);
+
+            if (hasChanges) {
+                updateExistingMovie(existingMovie, movieNode);
+                isUpdated = true;
+            }
+        } else {
+            // Adicionar um novo filme ao JSON
+            rootNode.set(movieTitle, movieNode);
+            isNewMovie = true; // Marcar como um filme novo
+        }
+
+        // Salvar as alterações no arquivo JSON
+        saveJsonFile();
+
+        // Mostrar mensagem de status da atualização
+        displayUpdateStatus(movieTitle, isUpdated, hasChanges, isNewMovie, updatedAttributes);
+    }
+
+    // Método para inicializar um novo nó de filme com todas as propriedades
+    private ObjectNode initializeMovieNode(String year, String idiomaAbreviado, String idiomaExtenso, String[] genres,
+                                           String movieLink, String movieCover, String trailerLink, String imdbLink,
+                                           String imdbRating, String synopsis, String runtime, String cast, String director,
+                                           ArrayNode availableResolutions) {
+        ObjectNode movieNode = objectMapper.createObjectNode();
         movieNode.put("Ano", year);
 
-        // Adicionando "Idioma" como um array
         ArrayNode idiomaArray = objectMapper.createArrayNode();
         idiomaArray.add(idiomaAbreviado);
         idiomaArray.add(idiomaExtenso);
         movieNode.set("Idioma", idiomaArray);
 
-        // Adicionando "Gêneros" como um array
         ArrayNode genresArray = objectMapper.createArrayNode();
         for (String genre : genres) {
             genresArray.add(genre);
         }
         movieNode.set("Gêneros", genresArray);
 
-        // Adicionando outros detalhes do filme
         movieNode.put("Link da página", movieLink);
         movieNode.put("Capa", movieCover);
         movieNode.put("Trailer", trailerLink);
@@ -72,27 +105,53 @@ public class JsonMovieWriter {
         movieNode.put("Elenco", cast);
         movieNode.put("Diretor", director);
         movieNode.set("Resoluções", availableResolutions);
+        movieNode.put("Contagem de Atualizações", 0); // Inicializa a contagem de atualizações para filmes novos
 
-        // Verificar se o filme já existe no JSON
-        if (rootNode.has(movieTitle)) {
-            ObjectNode existingMovie = (ObjectNode) rootNode.get(movieTitle);
+        return movieNode;
+    }
 
-            // Atualizar as informações do filme existente
-            existingMovie.setAll(movieNode);
-            isUpdated = true;
-        } else {
-            // Adicionar um novo filme ao JSON
-            rootNode.set(movieTitle, movieNode);
+    // Método para detectar mudanças entre o filme existente e o novo e armazenar os atributos atualizados
+    private boolean detectChanges(ObjectNode existingMovie, ObjectNode movieNode, List<String> updatedAttributes) {
+        boolean hasChanges = false;
+        Iterator<String> fieldNames = movieNode.fieldNames();
+
+        while (fieldNames.hasNext()) {
+            String fieldName = fieldNames.next();
+            if (existingMovie.has(fieldName)) {
+                if (!existingMovie.get(fieldName).toString().equals(movieNode.get(fieldName).toString())) {
+                    updatedAttributes.add(fieldName);
+                    hasChanges = true;
+                }
+            }
         }
+        return hasChanges;
+    }
 
-        // Salvar as alterações no arquivo JSON
-        saveJsonFile();
-
-        // Mostrar mensagem de status da atualização no método printMovieDetails
-        if (isUpdated) {
-            System.out.println("Filme: " + movieTitle + " (Updated)");
+    // Método para atualizar o filme existente com os novos dados e incrementar a contagem de atualizações
+    private void updateExistingMovie(ObjectNode existingMovie, ObjectNode movieNode) {
+        existingMovie.setAll(movieNode);
+        if (existingMovie.has("Contagem de Atualizações")) {
+            incrementUpdateCount(existingMovie);
         } else {
-            System.out.println("Filme: " + movieTitle + " foi adicionado.");
+            existingMovie.put("Contagem de Atualizações", 1); // Inicializar contagem de atualizações se não existir
+        }
+    }
+
+    // Método para incrementar a contagem de atualizações do filme
+    private void incrementUpdateCount(ObjectNode movieNode) {
+        int updateCount = movieNode.has("Contagem de Atualizações") ? movieNode.get("Contagem de Atualizações").asInt() : 0;
+        movieNode.put("Contagem de Atualizações", updateCount + 1);
+    }
+
+    // Método para exibir a mensagem de status da atualização e listar as mudanças
+    private void displayUpdateStatus(String movieTitle, boolean isUpdated, boolean hasChanges, boolean isNewMovie, List<String> updatedAttributes) {
+        if (isNewMovie) {
+            System.out.println("Filme: " + movieTitle + "  -->  Adicionado.");
+        } else if (isUpdated) {
+            System.out.print("Filme: " + movieTitle + "  -->  Atualizado. Atributos modificados: ");
+            System.out.println(String.join(", ", updatedAttributes));
+        } else {
+            System.out.println("Filme: " + movieTitle + "  -->  Sem modificações.");
         }
     }
 }
