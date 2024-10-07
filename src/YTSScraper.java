@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
 public class YTSScraper {
 
     public static void main(String[] args) {
-        // URL base para a primeira página
         String baseURL = "https://yts.mx/browse-movies/0/all/all/0/year/0/all";
         String paginatedURL = "https://yts.mx/browse-movies/0/all/all/0/year/0/all?page=";
 
@@ -21,15 +20,13 @@ public class YTSScraper {
         boolean hasNextPage = true;
 
         try {
-            // Processar a primeira página
             hasNextPage = scrapeAllMovies(baseURL);
 
-            // Processar as próximas páginas diretamente pela URL paginada
             pageNumber++;
             while (hasNextPage) {
-                String url = paginatedURL + pageNumber; // Usar paginatedURL para as próximas páginas
+                String url = paginatedURL + pageNumber;
                 hasNextPage = scrapeAllMovies(url);
-                pageNumber++; // Incrementar o número da página
+                pageNumber++;
             }
 
         } catch (IOException e) {
@@ -37,7 +34,6 @@ public class YTSScraper {
         }
     }
 
-    // Função para acessar uma página e processar todos os filmes nela
     private static boolean scrapeAllMovies(String url) throws IOException {
         Document doc = accessPageWithRetry(url, 3);
         if (doc == null) {
@@ -45,38 +41,33 @@ public class YTSScraper {
             return false;
         }
 
-        // Seleciona todos os elementos de filmes na página
         Elements movies = doc.select(".browse-movie-wrap");
 
-        // Se não houver filmes na página, retorne false
         if (movies.isEmpty()) {
             System.out.println("Nenhum filme encontrado na página: " + url);
             return false;
         }
 
-        // Para cada filme, processar e extrair detalhes
         for (Element movie : movies) {
             extractMovieDetails(movie);
         }
 
-        // Se filmes foram encontrados, continuar para a próxima página
         return true;
     }
 
-    // Função principal para extrair detalhes do filme
     private static void extractMovieDetails(Element movie) {
         String movieName = movie.select(".browse-movie-title").text();
         String movieLink = movie.select(".browse-movie-link").attr("href");
 
         String idiomaAbreviado = getIdiomaAbreviado(movieName);
-        String[] idiomaExtensoHolder = new String[]{"English"}; // Usar um array para armazenar o idioma extenso
+        String[] idiomaExtensoHolder = new String[]{"English"};
 
         try {
             Document movieDoc = connectToMoviePage(movieLink);
 
             String movieTitle = extractMovieTitle(movieDoc);
             String year = extractYearAndIdioma(movieDoc, idiomaExtensoHolder);
-            String idiomaExtenso = idiomaExtensoHolder[0]; // Recupera o valor atualizado do idioma extenso
+            String idiomaExtenso = idiomaExtensoHolder[0];
             String[] genres = extractGenres(movieDoc);
             String synopsis = extractSynopsis(movieDoc);
             String runtime = extractRuntime(movieDoc);
@@ -85,22 +76,32 @@ public class YTSScraper {
             String trailerLink = extractTrailerLink(movieDoc);
             String movieCover = extractMovieCover(movieDoc);
             String imdbLink = extractImdbLink(movieDoc);
+            String imdbId = extractImdbId(imdbLink); // Extraímos o código IMDb aqui
             String imdbRating = fetchImdbOrYtsRating(imdbLink, movieDoc);
 
-            // Cria um ObjectMapper para manipulação JSON
             ObjectMapper objectMapper = new ObjectMapper();
             ArrayNode availableResolutions = extractResolutions(movieDoc, objectMapper);
 
             JsonMovieWriter jsonMovieWriter = new JsonMovieWriter();
-            jsonMovieWriter.addOrUpdateMovie(movieTitle, year, idiomaAbreviado, idiomaExtenso, genres, movieLink, movieCover,
-                    trailerLink, imdbLink, imdbRating, synopsis, runtime, cast, director, availableResolutions);
+            jsonMovieWriter.addOrUpdateMovie(imdbId, movieTitle, year, idiomaAbreviado, idiomaExtenso, genres, movieLink,
+                    movieCover, trailerLink, imdbLink, imdbRating, synopsis, runtime, cast, director, availableResolutions);
         } catch (IOException e) {
             System.out.println("Erro ao acessar a página do filme: " + movieLink);
             System.out.println("Motivo: " + e.getMessage());
         }
     }
 
-    // Método para tentar acessar uma página com retries
+    private static String extractImdbId(String imdbLink) {
+        if (imdbLink != null && !imdbLink.isEmpty()) {
+            Pattern pattern = Pattern.compile("tt\\d+");
+            Matcher matcher = pattern.matcher(imdbLink);
+            if (matcher.find()) {
+                return matcher.group();
+            }
+        }
+        return "N/A";
+    }
+
     private static Document accessPageWithRetry(String url, int maxRetries) throws IOException {
         int retries = 0;
         Document doc = null;
@@ -110,12 +111,12 @@ public class YTSScraper {
                 doc = Jsoup.connect(url)
                         .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
                         .timeout(10 * 1000).get();
-                break; // Sucesso, sai do loop
+                break;
             } catch (IOException e) {
                 retries++;
                 System.out.println("Tentativa " + retries + " falhou para " + url);
                 if (retries >= maxRetries) {
-                    throw e; // Lança exceção se atingir o número máximo de tentativas
+                    throw e;
                 }
             }
         }
